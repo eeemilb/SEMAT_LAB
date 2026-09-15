@@ -1,0 +1,20 @@
+{
+  "name": "SEMAT LAB",
+  "short_name": "Лабаоратория_склад",
+  "description": "Система учёта комплектующих",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f5f7fb",
+  "theme_color": "#0f172a",
+  "lang": "ru",
+  "icons": [
+    {
+      "src": "logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
