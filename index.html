@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0f172a">
-<title>SEMAT LAB</title>
-<link rel="manifest" href="manifest.webmanifest">
+<title>Склад</title>
 <style>
 :root{
   --bg:#f5f7fb;--card:#fff;--border:#e6e9f0;--text:#0f172a;--muted:#64748b;
@@ -171,7 +170,6 @@ tr.group-row .group-dot{width:10px;height:10px;border-radius:50%;display:inline-
 .kb-card-btn{position:absolute;top:6px;right:6px;background:transparent;border:none;
   padding:4px;cursor:pointer;color:#94a3b8;border-radius:6px;line-height:0;opacity:0;transition:.15s}
 .kb-card:hover .kb-card-btn{opacity:1}
-/* DASHBOARD */
 .dash-section{margin-bottom:18px}
 .dash-section-title{margin:0 0 12px;font-size:12px;font-weight:700;color:var(--muted);
   text-transform:uppercase;letter-spacing:.06em}
@@ -556,12 +554,6 @@ textarea{resize:vertical;min-height:60px}
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
       <span class="hide-sm">Закупка</span>
     </button>
-    <button class="hbtn icon-only" id="btnImport" title="Импорт">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-    </button>
-    <button class="hbtn icon-only" id="btnExport" title="Экспорт JSON">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-    </button>
     <button class="hbtn icon-only" id="btnSettings" title="Настройки">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
     </button>
@@ -573,7 +565,6 @@ textarea{resize:vertical;min-height:60px}
       <span class="hide-sm">Позиция</span>
     </button>
   </div>
-  <input type="file" id="fileInput" accept=".json,application/json" hidden>
 </header>
 
 <main>
@@ -908,11 +899,103 @@ textarea{resize:vertical;min-height:60px}
 <div id="printArea"></div>
 <div id="toast"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/@ericblade/quagga2@1.7.7/dist/quagga.min.js"></script>
 <script>
 'use strict';
 (function(){
 try {
+
+/* ============ SUPABASE ============ */
+var SUPABASE_URL = 'https://nzvvdwiyzlgwgmndrebl.supabase.co';
+var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56dnZkd2l5emxnd2dtbmRyZWJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk0NzUwOTksImV4cCI6MjEwNTA1MTA5OX0.VCP3x24B8Q_mrQ9nof8Tcplsg16QpC0TJNb0angODEk';
+var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+/* Преобразование строк БД ↔ объекты приложения */
+function rowFromDB(row){
+  return {
+    id: row.id,
+    designation: row.designation || '',
+    name: row.name || '',
+    category: row.category || 'cables',
+    article: row.article || '',
+    link: row.link || '',
+    price: row.price,
+    length: row.qty,
+    unit: row.unit || 'м',
+    initialLength: row.initial_length,
+    minLength: row.min_length,
+    warehouse: row.warehouse || '',
+    rack: row.rack || '',
+    shelf: row.shelf || '',
+    cell: row.cell || '',
+    project: row.project || '',
+    machine: row.machine || '',
+    manufacturer: row.manufacturer || '',
+    supplier: row.supplier || '',
+    orderNumber: row.order_number || '',
+    barcode: row.barcode || '',
+    note: row.note || '',
+    fields: row.fields || {},
+    history: row.history || [],
+    status: row.status || 'stock',
+    createdAt: row.created_at,
+    updatedAt: row.updated_at
+  };
+}
+function rowToDB(it){
+  return {
+    id: it.id,
+    designation: it.designation,
+    name: it.name || '',
+    category: it.category || 'cables',
+    article: it.article || '',
+    link: it.link || '',
+    price: (it.price === '' || it.price == null) ? null : Number(it.price),
+    qty: (it.length === '' || it.length == null) ? 0 : Number(it.length),
+    unit: it.unit || 'м',
+    initial_length: (it.initialLength === '' || it.initialLength == null) ? 0 : Number(it.initialLength),
+    min_length: (it.minLength === '' || it.minLength == null) ? null : Number(it.minLength),
+    warehouse: it.warehouse || '',
+    rack: it.rack || '',
+    shelf: it.shelf || '',
+    cell: it.cell || '',
+    project: it.project || '',
+    machine: it.machine || '',
+    manufacturer: it.manufacturer || '',
+    supplier: it.supplier || '',
+    order_number: it.orderNumber || '',
+    barcode: it.barcode || null,
+    note: it.note || '',
+    fields: it.fields || {},
+    history: it.history || [],
+    status: it.status || 'stock',
+    updated_at: new Date().toISOString()
+  };
+}
+
+/* CRUD */
+async function sbLoadAll(){
+  var res = await sb.from('items').select('*').order('created_at', {ascending: true});
+  if(res.error) throw res.error;
+  return (res.data || []).map(rowFromDB);
+}
+async function sbInsert(it){
+  var res = await sb.from('items').insert(rowToDB(it)).select().single();
+  if(res.error) throw res.error;
+  return rowFromDB(res.data);
+}
+async function sbUpdate(id, patch){
+  var payload = Object.assign({}, patch, {updated_at: new Date().toISOString()});
+  var res = await sb.from('items').update(payload).eq('id', id).select().single();
+  if(res.error) throw res.error;
+  return rowFromDB(res.data);
+}
+async function sbDelete(id){
+  var res = await sb.from('items').delete().eq('id', id);
+  if(res.error) throw res.error;
+  return true;
+}
 
 /* ============ КОНСТАНТЫ ============ */
 var STATUSES = {
@@ -975,12 +1058,7 @@ var DEFAULT_CATEGORIES = [
   ]}
 ];
 
-var STORAGE_KEY='cable_inventory_v14';
-var SETTINGS_KEY='cable_inventory_settings_v14';
-var LEGACY_ITEMS=['cable_inventory_v13','cable_inventory_v12','cable_inventory_v11','cable_inventory_v10','cable_inventory_v9','cable_inventory_v8','cable_inventory_v7','cable_inventory_v6','cable_inventory_v5','cable_inventory_v4','cable_inventory_v3','cable_inventory_v1'];
-var LEGACY_SETTS=['cable_inventory_settings_v13','cable_inventory_settings_v12','cable_inventory_settings_v11','cable_inventory_settings_v10','cable_inventory_settings_v9','cable_inventory_settings_v8','cable_inventory_settings_v7','cable_inventory_settings_v6','cable_inventory_settings_v5','cable_inventory_settings_v4','cable_inventory_settings_v3','cable_inventory_settings_v1'];
-
-var LEGACY_CAT_MAP = {cables:'cables',cable_acc:'consumables',terminals:'consumables',protection:'electrical',switching:'electrical',power:'electrical',control:'electrical',sensors:'electrical',drives:'drives',enclosure:'mechanics',consumables:'consumables',components:'electrical',fasteners:'mechanics',cnc:'electrical',mechanics:'mechanics',electrical:'electrical'};
+var SETTINGS_KEY='cable_inventory_settings_v16';
 
 var DEFAULT_SETTINGS = {
   warehouses:['Основной'],projects:[],machines:[],
@@ -1018,13 +1096,23 @@ function statusOf(k){ return STATUSES[k]||STATUSES.stock; }
 function findItem(id){ for(var i=0;i<items.length;i++) if(items[i].id===id) return items[i]; return null; }
 function getFieldValue(it,key){ if(it.fields&&it.fields[key]!=null) return it.fields[key]; if(it[key]!=null) return it[key]; return ''; }
 function getCatIcon(id){ return CAT_ICONS[id]||CAT_ICONS.cables; }
-function getColor(it){ var cat=categoryOf(it.category); if(cat&&cat.fields){ for(var i=0;i<cat.fields.length;i++) if(cat.fields[i].type==='color'){ var v=getFieldValue(it,cat.fields[i].key); if(v) return v; } } return cat?cat.color:'#3b82f6'; }
-// Цвет для иконки позиции — берёт поле color, если оно есть, иначе цвет категории
 function iconColorOf(it){
   if(!it) return '#3b82f6';
   var v = getFieldValue(it, 'color');
   if(v && /^#[0-9a-fA-F]{6}$/.test(v)) return v;
   var cat = categoryOf(it.category);
+  return cat ? cat.color : '#3b82f6';
+}
+function getColor(it){
+  var cat = categoryOf(it.category);
+  if(cat && cat.fields){
+    for(var i=0;i<cat.fields.length;i++){
+      if(cat.fields[i].type==='color'){
+        var v = getFieldValue(it, cat.fields[i].key);
+        if(v) return v;
+      }
+    }
+  }
   return cat ? cat.color : '#3b82f6';
 }
 function fld(form, name){ return form.querySelector('[name="'+name+'"]'); }
@@ -1036,41 +1124,67 @@ function tokenize(s){ var n=normStr(s); return n?n.split(' ').filter(Boolean):[]
 function buildBlob(it){ var cat=categoryOf(it.category); var parts=[it.designation,it.name,it.supplier,it.article,it.link,it.barcode,it.project,it.machine,it.manufacturer,it.warehouse,locStr(it),cat?cat.label:'']; if(it.fields) for(var k in it.fields) if(it.fields.hasOwnProperty(k)) parts.push(it.fields[k]); return parts.filter(Boolean).join(' '); }
 function matchScore(tokens,it){ var blob=normStr(buildBlob(it)); if(!tokens.length) return 1; var total=0; for(var i=0;i<tokens.length;i++){ var t=tokens[i]; var best=blob.indexOf(t)!==-1?(blob.indexOf(t)===0?1:0.9):0; total+=best; } return total/tokens.length; }
 
-/* ============ ХРАНИЛИЩЕ ============ */
-function loadLocal(){
+/* ============ ЗАГРУЗКА ============ */
+async function loadLocal(){
   try{
-    var raw = localStorage.getItem(STORAGE_KEY);
-    if(raw) items = JSON.parse(raw)||[];
-    else for(var i=0;i<LEGACY_ITEMS.length;i++){ var r=localStorage.getItem(LEGACY_ITEMS[i]); if(r){ try{ var p=JSON.parse(r); if(Array.isArray(p)&&p.length){ items=p; console.info('Migrated from',LEGACY_ITEMS[i]); break; } }catch(e){} } }
-    for(var j=0;j<items.length;j++) migrateItem(items[j]);
-  }catch(e){ console.error(e); items=[]; }
+    items = await sbLoadAll();
+    console.log('[SKLAD] Загружено из Supabase:', items.length, 'позиций');
+  }catch(e){
+    console.error('Ошибка загрузки из Supabase:', e);
+    toast('Ошибка загрузки данных из облака: '+(e.message||e), 'err');
+    items = [];
+  }
   try{
     var rawS = localStorage.getItem(SETTINGS_KEY);
-    if(rawS) settings = Object.assign({},DEFAULT_SETTINGS,JSON.parse(rawS));
-    else for(var k=0;k<LEGACY_SETTS.length;k++){ var rS=localStorage.getItem(LEGACY_SETTS[k]); if(rS){ try{ var ps=JSON.parse(rS); if(ps&&typeof ps==='object'){ settings=Object.assign({},DEFAULT_SETTINGS,ps); break; } }catch(e){} } }
+    if(rawS) settings = Object.assign({}, DEFAULT_SETTINGS, JSON.parse(rawS));
     if(!Array.isArray(settings.categories)||!settings.categories.length||!settings.categories[0].fields) settings.categories = JSON.parse(JSON.stringify(DEFAULT_CATEGORIES));
     saveSettings();
   }catch(e){ console.error(e); }
 }
-function migrateItem(it){
-  if(!it.fields) it.fields = {};
-  var legacy = ['brand','section','cores','diameter','rating','color','colorName'];
-  for(var i=0;i<legacy.length;i++){ var k=legacy[i]; if(it[k]!=null&&it[k]!==''&&it.fields[k]===undefined) it.fields[k]=it[k]; }
-  var valid=false; for(var c=0;c<DEFAULT_CATEGORIES.length;c++) if(DEFAULT_CATEGORIES[c].id===it.category){ valid=true; break; }
-  if(!valid) it.category = LEGACY_CAT_MAP[it.category]||'cables';
-  if(!it.id) it.id = uid();
-  if(!it.barcode) it.barcode = genBarcode();
-  if(!it.history) it.history = [];
-  if(typeof it.machine!=='string') it.machine='';
-  if(typeof it.project!=='string') it.project='';
-  if(typeof it.manufacturer!=='string') it.manufacturer='';
-  if(typeof it.article!=='string') it.article='';
-  if(typeof it.link!=='string') it.link='';
-  return it;
-}
-function saveLocal(){ try{ localStorage.setItem(STORAGE_KEY,JSON.stringify(items)); }catch(e){ console.error(e); } }
 function saveSettings(){ try{ localStorage.setItem(SETTINGS_KEY,JSON.stringify(settings)); }catch(e){} }
 function genBarcode(){ var p=settings.barcodePrefix||'C'; var n=settings.nextBarcode||1; settings.nextBarcode=n+1; saveSettings(); return p+String(n).padStart(6,'0'); }
+
+/* ============ REALTIME ============ */
+var rtChannel = null;
+function initRealtime(){
+  try{
+    rtChannel = sb.channel('items-rt')
+      .on('postgres_changes', {event:'*', schema:'public', table:'items'}, function(payload){
+        // Перезагружаем при внешних изменениях. Локальные изменения уже применены и items обновлён.
+        if(payload && payload.eventType === 'UPDATE'){
+          var row = payload.new;
+          if(!row) return;
+          var local = findItem(row.id);
+          if(local){
+            // Обновляем только если realtime пришёл "извне" — сверяем updated_at
+            if(local.updatedAt !== row.updated_at){
+              items = items.map(function(x){ return x.id === row.id ? rowFromDB(row) : x; });
+              renderAll();
+            }
+          } else {
+            items.push(rowFromDB(row));
+            renderAll();
+          }
+        } else if(payload && payload.eventType === 'INSERT'){
+          var rowI = payload.new;
+          if(rowI && !findItem(rowI.id)){
+            items.push(rowFromDB(rowI));
+            renderAll();
+          }
+        } else if(payload && payload.eventType === 'DELETE'){
+          var old = payload.old;
+          if(old && old.id){
+            items = items.filter(function(x){ return x.id !== old.id; });
+            renderAll();
+          }
+        }
+      })
+      .subscribe();
+    console.log('[SKLAD] Realtime подписка активна');
+  }catch(e){
+    console.warn('Realtime не подключён:', e);
+  }
+}
 
 /* ============ ЛОГОТИП ============ */
 function tryAutoLoadLogo(){
@@ -1085,7 +1199,6 @@ function tryAutoLoadLogo(){
           var b=$('#brandLogo'), bg=$('#bgLogo');
           if(b) b.innerHTML = txt;
           if(bg) bg.innerHTML = txt;
-          console.info('Logo loaded:', f);
         } else next();
       }).catch(function(){ next(); });
     } else {
@@ -1095,7 +1208,6 @@ function tryAutoLoadLogo(){
         var tag = '<img src="'+f+'" alt="logo">';
         if(b) b.innerHTML = tag;
         if(bg) bg.innerHTML = tag;
-        console.info('Logo loaded:', f);
       };
       img.onerror = function(){ next(); };
       img.src = f+'?t='+Date.now();
@@ -1200,7 +1312,6 @@ function rowHtml(it){
   var loc = locStr(it);
   var unit = it.unit||'м';
   var specs = specsOf(it);
-  var cat = categoryOf(it.category);
   var col = iconColorOf(it);
 
   var projHtml = '—';
@@ -1279,11 +1390,10 @@ function computeTotals(list){
   for(var i=0;i<list.length;i++){ var it=list[i]; var q=+it.length||0; qty+=q; value+=(+it.price||0)*q; }
   return {count:cnt, qty:qty, value:value};
 }
-
 function renderDashboard(){
   var el = $('#dashboardContent'); if(!el) return;
   if(!items.length){
-    el.innerHTML = '<div class="empty"><h3>Нет данных</h3><p>Добавьте позиции, чтобы увидеть отчёты.</p></div>';
+    el.innerHTML = '<div class="empty"><h3>Нет данных</h3><p>Добавьте позиции.</p></div>';
     return;
   }
   var cur = settings.currency||'₽';
@@ -1296,8 +1406,6 @@ function renderDashboard(){
     if(it.status === 'order' || it.status === 'transit') inWork++;
     if(it.status === 'stock' && (+it.initialLength>0) && q < (+it.initialLength)*lowPct/100) lowCount++;
   }
-
-  /* По категориям */
   var catStats = [];
   for(var ci=0; ci<settings.categories.length; ci++){
     var c = settings.categories[ci];
@@ -1313,7 +1421,6 @@ function renderDashboard(){
     catStats.push({cat:c, count:cItems.length, qty:cQty, value:cValue});
   }
   catStats.sort(function(a,b){ return b.value - a.value; });
-
   var catBlocks = '';
   for(var cs=0; cs<catStats.length; cs++){
     var s = catStats[cs];
@@ -1326,8 +1433,6 @@ function renderDashboard(){
       '<div class="cat-sum-value">' + fmt(s.value,0) + ' ' + esc(cur) + '</div>' +
     '</div>';
   }
-
-  /* Проекты → станки → позиции */
   var tree = {}, projOrder = [];
   for(var pi=0; pi<items.length; pi++){
     var itp = items[pi];
@@ -1343,7 +1448,6 @@ function renderDashboard(){
     if(!aU && bU) return -1;
     return a.localeCompare(b,'ru');
   });
-
   var projHtml = '';
   for(var pj=0; pj<projOrder.length; pj++){
     var pName = projOrder[pj];
@@ -1359,7 +1463,6 @@ function renderDashboard(){
     var pt = computeTotals(pItems);
     var pId = 'proj_'+pj;
     var pOpen = collapsedProjects[pId] === true ? '' : ' open';
-
     var machinesHtml = '';
     for(var mj=0; mj<mNames.length; mj++){
       var mName = mNames[mj];
@@ -1400,8 +1503,6 @@ function renderDashboard(){
       '<div class="proj-body">'+machinesHtml+'</div>'+
     '</div>';
   }
-
-  /* Графики */
   var catData = [];
   for(var ci2=0; ci2<settings.categories.length; ci2++){
     var c2 = settings.categories[ci2], cnt = 0;
@@ -1414,7 +1515,6 @@ function renderDashboard(){
     for(var sm=0; sm<items.length; sm++) if(items[sm].status===skk) scnt++;
     if(scnt>0) statusData.push({label:STATUSES[skk].label,value:scnt,color:STATUSES[skk].fg});
   }
-
   el.innerHTML =
     '<div class="dash-top">'+
       '<div class="dash-hero">'+
@@ -1422,40 +1522,17 @@ function renderDashboard(){
         '<div class="val">'+fmt(totals.value,0)+' '+esc(cur)+'</div>'+
         '<div class="sub">по '+projOrder.length+' проектам · '+catStats.length+' категориям</div>'+
       '</div>'+
-      '<div class="dash-stat">'+
-        '<div class="lbl">Всего позиций</div>'+
-        '<div class="val">'+totals.count+'</div>'+
-        '<div class="sub">'+fmt(totals.qty,0)+' единиц</div>'+
-      '</div>'+
-      '<div class="dash-stat">'+
-        '<div class="lbl">На складе</div>'+
-        '<div class="val" style="color:var(--success)">'+fmt(stockQty,0)+'</div>'+
-        '<div class="sub">единиц в наличии</div>'+
-      '</div>'+
-      '<div class="dash-stat">'+
-        '<div class="lbl">Заказано / в пути</div>'+
-        '<div class="val" style="color:var(--warning)">'+inWork+'</div>'+
-        '<div class="sub">позиций</div>'+
-      '</div>'+
-      '<div class="dash-stat">'+
-        '<div class="lbl">Мало (&lt;'+lowPct+'%)</div>'+
-        '<div class="val" style="color:'+(lowCount?'var(--danger)':'var(--text)')+'">'+lowCount+'</div>'+
-        '<div class="sub">позиций к дозаказу</div>'+
-      '</div>'+
+      '<div class="dash-stat"><div class="lbl">Всего позиций</div><div class="val">'+totals.count+'</div><div class="sub">'+fmt(totals.qty,0)+' единиц</div></div>'+
+      '<div class="dash-stat"><div class="lbl">На складе</div><div class="val" style="color:var(--success)">'+fmt(stockQty,0)+'</div><div class="sub">единиц в наличии</div></div>'+
+      '<div class="dash-stat"><div class="lbl">Заказано / в пути</div><div class="val" style="color:var(--warning)">'+inWork+'</div><div class="sub">позиций</div></div>'+
+      '<div class="dash-stat"><div class="lbl">Мало (&lt;'+lowPct+'%)</div><div class="val" style="color:'+(lowCount?'var(--danger)':'var(--text)')+'">'+lowCount+'</div><div class="sub">позиций к дозаказу</div></div>'+
     '</div>'+
-    '<div class="dash-section">'+
-      '<h3 class="dash-section-title">По категориям</h3>'+
-      '<div class="cat-sum-grid">'+catBlocks+'</div>'+
-    '</div>'+
-    '<div class="dash-section">'+
-      '<h3 class="dash-section-title">Проекты и станки</h3>'+
-      '<div class="projects-list">'+projHtml+'</div>'+
-    '</div>'+
+    '<div class="dash-section"><h3 class="dash-section-title">По категориям</h3><div class="cat-sum-grid">'+catBlocks+'</div></div>'+
+    '<div class="dash-section"><h3 class="dash-section-title">Проекты и станки</h3><div class="projects-list">'+projHtml+'</div></div>'+
     '<div class="dash-charts">'+
       renderPieCard('Распределение по категориям', catData)+
       renderBarCard('По статусам', statusData)+
     '</div>';
-
   el.querySelectorAll('[data-toggle-project]').forEach(function(h){
     h.addEventListener('click', function(){
       var pid = h.getAttribute('data-toggle-project');
@@ -1518,7 +1595,7 @@ function renderBarCard(title,data){
   return '<div class="dash-card"><h3>'+esc(title)+'</h3><div class="bar-chart">'+rows+'</div></div>';
 }
 
-/* ============ КАРТОЧКА ============ */
+/* ============ КАРТОЧКА ПРОСМОТРА ============ */
 function openViewModal(id){
   try{
     var it = findItem(id); if(!it){ toast('Позиция не найдена','err'); return; }
@@ -1528,9 +1605,7 @@ function openViewModal(id){
     var pct = initLen>0 ? Math.min(100,Math.max(0,cur/initLen*100)) : (cur>0?100:0);
     var lowPct=+settings.lowThreshold||20, critPct=+settings.critThreshold||5;
     var cls = ''; if(initLen>0 && cur<initLen*lowPct/100) cls = cur<initLen*critPct/100?'crit':'low';
-
     var statusOpts = STATUS_ORDER.map(function(k){ return '<option value="'+k+'"'+(k===it.status?' selected':'')+'>'+STATUSES[k].label+'</option>'; }).join('');
-
     var fieldsRows = '';
     if(cat&&cat.fields){
       for(var i=0;i<cat.fields.length;i++){
@@ -1548,18 +1623,15 @@ function openViewModal(id){
       }
     }
     var fieldsHtml = fieldsRows ? '<div class="view-fields"><h4>Характеристики</h4>'+fieldsRows+'</div>' : '';
-
     var loc = locStr(it);
     var fullLocStr = it.warehouse ? esc(it.warehouse)+(loc?' · '+esc(loc):'') : (loc?esc(loc):'—');
     var linkHtml = '—';
     if(it.link) linkHtml = '<a href="'+escAttr(it.link)+'" target="_blank" class="link-cell" style="font-size:12px">'+ICON_LINK_SM+'<span>'+esc(it.link.length>50?it.link.slice(0,48)+'…':it.link)+'</span></a>';
-
     function cp(text,label){ if(!text) return ''; return '<button type="button" class="copy-btn" title="Скопировать '+label+'" data-copy="'+escAttr(text)+'" data-copy-label="'+escAttr(label)+'">'+ICON_COPY+'</button>'; }
-
     $('#viewTitle').textContent = 'Карточка';
     $('#viewBody').innerHTML =
       '<div class="view-hero"><div class="view-head-row">'+
-                (function(){var col=iconColorOf(it); return '<span class="cat-icon" style="background:'+col+'1f;color:'+col+'">'+getCatIcon(it.category)+'</span>';})()+
+        (function(){var col=iconColorOf(it); return '<span class="cat-icon" style="background:'+col+'1f;color:'+col+'">'+getCatIcon(it.category)+'</span>';})()+
         '<div style="flex:1;min-width:0">'+
           '<div class="view-designation">'+esc(it.designation||'—')+cp(it.designation,'обозначение')+'</div>'+
           (it.name?'<div class="view-name">'+esc(it.name)+cp(it.name,'наименование')+'</div>':'')+
@@ -1592,16 +1664,21 @@ function openViewModal(id){
       '</div>'+
       fieldsHtml+
       (it.note?'<div class="view-fields"><h4>Примечание</h4><div style="font-size:13px">'+esc(it.note)+'</div></div>':'');
-
     var body = $('#viewBody');
     var stSel = $('#viewStatusSelect');
-    if(stSel) stSel.addEventListener('change', function(){
+    if(stSel) stSel.addEventListener('change', async function(){
       var old = it.status;
       it.status = stSel.value;
       it.updatedAt = new Date().toISOString();
       addHistory(it,'status',0,'Статус: '+statusOf(old).label+' → '+statusOf(it.status).label);
-      saveLocal(); renderAll();
-      toast('Статус: '+statusOf(it.status).label,'ok');
+      renderAll();
+      try{
+        await sbUpdate(it.id, {status: it.status, history: it.history, updated_at: it.updatedAt});
+        toast('Статус: '+statusOf(it.status).label,'ok');
+      }catch(e){
+        toast('Ошибка: '+(e.message||e),'err');
+        console.error(e);
+      }
     });
     body.querySelectorAll('.copy-btn').forEach(function(b){
       b.addEventListener('click', function(e){
@@ -1618,7 +1695,6 @@ function openViewModal(id){
         else if(act==='op'){ var op = b.getAttribute('data-op'); closeModal('#modalView'); setTimeout(function(){ openOpModal(id,op); }, 150); }
       });
     });
-
     openModal('#modalView');
   }catch(err){
     console.error('openViewModal:', err);
@@ -1679,14 +1755,12 @@ function openItemModal(id){
     var form = $('#itemForm'); if(!form){ toast('Форма не найдена','err'); return; }
     form.reset();
     $('#itemModalTitle').textContent = id ? 'Редактирование' : 'Новая позиция';
-
     var dl = $('#dl-designations');
     if(dl){
       var seen={}, opts='';
       for(var m=0;m<items.length;m++){ var d=items[m].designation; if(d&&!seen[d]){ seen[d]=true; opts+='<option value="'+escAttr(d)+'">'; } }
       dl.innerHTML = opts;
     }
-
     if(id){
       var it = findItem(id);
       if(!it){ toast('Позиция не найдена','err'); return; }
@@ -1727,18 +1801,15 @@ function openItemModal(id){
       var lk = fld(form, 'link'); if(lk) lk.value = '';
       renderCatSelector(c0?c0.id:'');
     }
-
     openModal('#modalItem');
-    setTimeout(function(){
-      try{ var des = fld(form,'designation'); if(des) des.focus(); }catch(e){}
-    }, 100);
+    setTimeout(function(){ try{ var des = fld(form,'designation'); if(des) des.focus(); }catch(e){} }, 100);
   }catch(err){
     console.error('openItemModal:', err);
     toast('Ошибка открытия формы: '+err.message,'err');
   }
 }
 
-function submitItemForm(e){
+async function submitItemForm(e){
   try{
     e.preventDefault();
     var f = e.target;
@@ -1789,17 +1860,30 @@ function submitItemForm(e){
       if(Number(data.length)!==oldLen && data.length!=null){
         addHistory(it,'invent',0,'Ручное изменение ('+fmt(oldLen,1)+' → '+fmt(data.length,1)+')');
       }
-      toast('Изменения сохранены','ok');
+      // Сохраняем в Supabase
+      var patch = rowToDB(it); delete patch.id;
+      try{
+        await sbUpdate(it.id, patch);
+        toast('Изменения сохранены','ok');
+      }catch(e){
+        console.error(e); toast('Ошибка сохранения: '+(e.message||e),'err');
+      }
     } else {
       var newIt = {id:uid(),history:[],createdAt:now,updatedAt:now,fields:fields};
       for(var k2 in data) if(data.hasOwnProperty(k2)) newIt[k2] = data[k2];
       newIt.length = Number(data.length)||Number(data.initialLength)||0;
       newIt.initialLength = Number(data.initialLength)||Number(data.length)||0;
       addHistory(newIt,'receive',+newIt.length||0,'Создание позиции');
-      items.push(newIt);
-      toast('Позиция добавлена','ok');
+      try{
+        var created = await sbInsert(newIt);
+        items.push(created);
+        toast('Позиция добавлена','ok');
+      }catch(e){
+        console.error(e); toast('Ошибка создания: '+(e.message||e),'err');
+        return;
+      }
     }
-    saveLocal(); renderAll(); closeModal('#modalItem');
+    renderAll(); closeModal('#modalItem');
   }catch(err){
     console.error('submitItemForm:', err);
     toast('Ошибка сохранения: '+err.message,'err');
@@ -1843,7 +1927,7 @@ function openOpModal(id, initialType){
   openModal('#modalOp');
   setTimeout(function(){ var a = fld(f,'amount'); if(a) a.focus(); }, 100);
 }
-function submitOpForm(e){
+async function submitOpForm(e){
   e.preventDefault();
   var it = findItem(opTargetId); if(!it) return;
   var f = e.target;
@@ -1858,8 +1942,13 @@ function submitOpForm(e){
   it.length = newLen;
   it.updatedAt = new Date().toISOString();
   addHistory(it,type,op.sign!==0?op.sign*amount:0,comment||op.label);
-  saveLocal(); renderAll(); closeModal('#modalOp');
+  renderAll(); closeModal('#modalOp');
   toast(op.label+': '+fmt(amount,1)+' '+(it.unit||'м')+' → '+fmt(newLen,1),'ok');
+  try{
+    await sbUpdate(it.id, {qty: it.length, history: it.history, updated_at: it.updatedAt});
+  }catch(e){
+    console.error(e); toast('Ошибка сохранения: '+(e.message||e),'err');
+  }
 }
 
 /* ============ УДАЛЕНИЕ ============ */
@@ -1868,12 +1957,32 @@ function askDelete(id){
   $('#confirmTitle').textContent = 'Удаление';
   $('#confirmMsg').innerHTML = 'Удалить <b>'+esc(it.designation||'')+'</b>?<br><span style="color:var(--muted);font-size:12.5px">Необратимо.</span>';
   $('#confirmOk').textContent = 'Удалить';
-  confirmCb = function(){
-    items = items.filter(function(x){ return x.id!==id; });
-    saveLocal(); renderAll();
-    toast('Позиция удалена','ok');
+  confirmCb = async function(){
+    try{
+      await sbDelete(id);
+      items = items.filter(function(x){ return x.id!==id; });
+      renderAll();
+      toast('Позиция удалена','ok');
+    }catch(e){
+      console.error(e); toast('Ошибка удаления: '+(e.message||e),'err');
+    }
   };
   openModal('#modalConfirm');
+}
+
+/* ============ СМЕНА СТАТУСА (общая) ============ */
+async function changeItemStatus(id, newStatus){
+  var it = findItem(id); if(!it) return;
+  var old = it.status;
+  it.status = newStatus;
+  it.updatedAt = new Date().toISOString();
+  addHistory(it,'status',0,'Статус: '+statusOf(old).label+' → '+statusOf(it.status).label);
+  renderAll();
+  try{
+    await sbUpdate(it.id, {status: it.status, history: it.history, updated_at: it.updatedAt});
+  }catch(e){
+    console.error(e); toast('Ошибка сохранения: '+(e.message||e),'err');
+  }
 }
 
 /* ============ МОДАЛЫ ============ */
@@ -2050,7 +2159,7 @@ async function exportStockXLSX(){
   try{ await loadExcelJS(); } catch(e){ toast(e.message,'err'); return; }
   var wb = new ExcelJS.Workbook();
   var ws = wb.addWorksheet('Склад', {views:[{state:'frozen',ySplit:1}]});
-    ws.columns = [{width:6},{width:18},{width:28},{width:45},{width:50},{width:10},{width:8},{width:14},{width:16},{width:22},{width:22},{width:16}];
+  ws.columns = [{width:6},{width:18},{width:28},{width:45},{width:50},{width:10},{width:8},{width:14},{width:16},{width:22},{width:22},{width:16}];
   var h = ws.addRow(['№','Категория','Обозначение','Наименование','Ссылка','Кол-во','Ед.','Цена (₽)','Сумма (₽)','Проект','Станок','Статус']);
   h.height = 26;
   h.eachCell(applyHeaderStyle);
@@ -2093,7 +2202,8 @@ async function exportDashboardXLSX(){
   var cur = settings.currency||'₽';
   var wb = new ExcelJS.Workbook();
   var ws = wb.addWorksheet('Отчёт по проектам', {views:[{state:'frozen',ySplit:1}]});
-  ws.columns = [{width:6},{width:24},{width:24},{width:50},{width:10},{width:8},{width:14},{width:18},{width:18}];  var h = ws.addRow(['№','Проект','Станок','Обозначение','Кол-во','Ед.','Цена ('+cur+')','Сумма ('+cur+')','']);
+  ws.columns = [{width:6},{width:24},{width:24},{width:50},{width:10},{width:8},{width:14},{width:18},{width:18}];
+  var h = ws.addRow(['№','Проект','Станок','Обозначение','Кол-во','Ед.','Цена ('+cur+')','Сумма ('+cur+')','']);
   h.height = 28;
   h.eachCell(applyHeaderStyle);
   var tree = {};
@@ -2221,7 +2331,7 @@ function exportPurchaseCSV(){
 /* ============ ЭКСПОРТ/ИМПОРТ JSON ============ */
 function exportJSON(){
   var payload = {
-    version: 14, type: 'cable-inventory',
+    version: 16, type: 'cable-inventory',
     exportedAt: new Date().toISOString(),
     count: items.length,
     settings: {warehouses:settings.warehouses,projects:settings.projects,machines:settings.machines,categories:settings.categories,currency:settings.currency,lowThreshold:settings.lowThreshold,critThreshold:settings.critThreshold,barcodePrefix:settings.barcodePrefix,nextBarcode:settings.nextBarcode},
@@ -2233,10 +2343,10 @@ function exportJSON(){
   URL.revokeObjectURL(url);
   toast('Экспортировано','ok');
 }
-function importJSONFile(e){
+async function importJSONFile(e){
   var file = e.target.files[0]; if(!file) return;
   var reader = new FileReader();
-  reader.onload = function(ev){
+  reader.onload = async function(ev){
     try{
       var data = JSON.parse(ev.target.result);
       var arr = Array.isArray(data)?data:(data.items&&Array.isArray(data.items)?data.items:null);
@@ -2245,18 +2355,45 @@ function importJSONFile(e){
       $('#confirmTitle').textContent = 'Импорт';
       $('#confirmMsg').innerHTML = 'Загружено <b>'+arr.length+'</b> позиций.<br>Текущие ('+items.length+') будут заменены.';
       $('#confirmOk').textContent = 'Заменить';
-      confirmCb = function(){
-        items = arr;
-        if(data.settings){ settings = Object.assign({},DEFAULT_SETTINGS,data.settings); saveSettings(); refreshSelects(); }
-        saveLocal(); renderAll();
-        toast('Импортировано: '+arr.length,'ok');
-        $('#confirmOk').textContent = 'Удалить';
+      confirmCb = async function(){
+        try{
+          // Удаляем все существующие
+          var ids = items.map(function(x){return x.id;});
+          for(var i=0;i<ids.length;i++){
+            await sb.from('items').delete().eq('id', ids[i]);
+          }
+          // Загружаем новые
+          for(var j=0;j<arr.length;j++){
+            var it = arr[j];
+            if(!it.id) it.id = uid();
+            await sb.from('items').insert(rowToDB(it));
+          }
+          items = await sbLoadAll();
+          if(data.settings){ settings = Object.assign({},DEFAULT_SETTINGS,data.settings); saveSettings(); refreshSelects(); }
+          renderAll();
+          toast('Импортировано: '+arr.length,'ok');
+          $('#confirmOk').textContent = 'Удалить';
+        }catch(err){
+          console.error(err);
+          toast('Ошибка импорта: '+(err.message||err),'err');
+        }
       };
       openModal('#modalConfirm');
     }catch(err){ toast('Ошибка: '+err.message,'err'); }
   };
   reader.readAsText(file);
   e.target.value = '';
+}
+function migrateItem(it){
+  if(!it.fields) it.fields = {};
+  var legacy = ['brand','section','cores','diameter','rating','color','colorName'];
+  for(var i=0;i<legacy.length;i++){ var k=legacy[i]; if(it[k]!=null&&it[k]!==''&&it.fields[k]===undefined) it.fields[k]=it[k]; }
+  var valid=false; for(var c=0;c<DEFAULT_CATEGORIES.length;c++) if(DEFAULT_CATEGORIES[c].id===it.category){ valid=true; break; }
+  if(!valid) it.category='cables';
+  if(!it.id) it.id = uid();
+  if(!it.barcode) it.barcode = genBarcode();
+  if(!it.history) it.history = [];
+  return it;
 }
 
 /* ============ НАСТРОЙКИ ============ */
@@ -2433,7 +2570,6 @@ function bindTable(){
       var action = btn.getAttribute('data-action');
       var id = btn.getAttribute('data-id');
       if(action==='status') return;
-      console.log('[SKLAD] action:', action, 'id:', id);
       if(!id) return;
       e.stopPropagation(); e.preventDefault();
       if(action==='view') openViewModal(id);
@@ -2454,24 +2590,14 @@ function bindTable(){
     }
     if(e.target.closest('a') || e.target.closest('select')) return;
     var tr = e.target.closest('tr[data-id]');
-    if(tr){
-      var rid = tr.getAttribute('data-id');
-      openViewModal(rid);
-    }
+    if(tr){ openViewModal(tr.getAttribute('data-id')); }
   });
   tbody.addEventListener('change', function(e){
     var sel = e.target.closest('select[data-action="status"]');
     if(!sel) return;
     var tr = sel.closest('tr[data-id]');
     if(!tr) return;
-    var id = tr.getAttribute('data-id');
-    var it = findItem(id); if(!it) return;
-    var old = it.status;
-    it.status = sel.value;
-    it.updatedAt = new Date().toISOString();
-    addHistory(it,'status',0,'Статус: '+statusOf(old).label+' → '+statusOf(it.status).label);
-    saveLocal(); renderAll();
-    toast('Статус: '+statusOf(it.status).label,'ok');
+    changeItemStatus(tr.getAttribute('data-id'), sel.value);
   });
 }
 
@@ -2483,8 +2609,8 @@ function bindEvents(){
       var m = c.closest('.modal'); if(m){ closeModal('#'+m.id); return; }
       var s = c.closest('.sheet'); if(s){ closeSheet('#'+s.id); return; }
     }
-    var sb = e.target.closest('[data-sheet-close]');
-    if(sb){ var s2 = sb.closest('.sheet'); if(s2){ closeSheet('#'+s2.id); return; } }
+    var sbEl = e.target.closest('[data-sheet-close]');
+    if(sbEl){ var s2 = sbEl.closest('.sheet'); if(s2){ closeSheet('#'+s2.id); return; } }
     if(e.target.classList && e.target.classList.contains('modal')) closeModal('#'+e.target.id);
   });
   document.addEventListener('keydown', function(e){
@@ -2609,7 +2735,7 @@ function bindEvents(){
       e.preventDefault(); c.classList.remove('drag-over');
       var id = null; try{ id = e.dataTransfer.getData('text/plain'); }catch(err){}
       var st = c.getAttribute('data-status');
-      if(id && st){ var it = findItem(id); if(it && it.status!==st){ var old = it.status; it.status = st; it.updatedAt = new Date().toISOString(); addHistory(it,'status',0,'Статус: '+statusOf(old).label+' → '+statusOf(st).label); saveLocal(); renderAll(); toast('Статус: '+statusOf(st).label,'ok'); } }
+      if(id && st) changeItemStatus(id, st);
     });
     bd.addEventListener('click', function(e){
       var btn = e.target.closest('[data-action]');
@@ -2629,14 +2755,15 @@ function initPWA(){
 }
 
 /* ============ INIT ============ */
-function init(){
+async function init(){
   console.log('[SKLAD] init start');
-  loadLocal();
+  await loadLocal();
   refreshSelects();
   bindEvents();
   bindTable();
   setView('table');
   renderAll();
+  initRealtime();
   initPWA();
   tryAutoLoadLogo();
   console.log('[SKLAD] init done. items:', items.length);
@@ -2653,19 +2780,6 @@ else init();
   document.body.appendChild(box);
 }
 })();
-</script>
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('sw.js')
-        .then(function(registration) {
-          console.log('ServiceWorker зарегистрирован с областью:', registration.scope);
-        })
-        .catch(function(error) {
-          console.log('Ошибка регистрации ServiceWorker:', error);
-        });
-    });
-  }
 </script>
 </body>
 </html>
