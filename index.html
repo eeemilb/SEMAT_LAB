@@ -66,14 +66,7 @@ tr.group-row.collapsed .group-toggle{transform:rotate(-90deg)}
 tr.group-row .group-meta{color:var(--muted);font-weight:400;font-size:11.5px;margin-left:8px}
 tr.group-row .group-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:8px;vertical-align:middle}
 .cat-icon{width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:inset 0 0 0 1px rgba(15,23,42,.06)}
-.cat-icon svg{
-  width:16px;height:16px;display:block;
-  filter:
-    drop-shadow(0.6px 0 0 rgba(15,23,42,.55))
-    drop-shadow(-0.6px 0 0 rgba(15,23,42,.55))
-    drop-shadow(0 0.6px 0 rgba(15,23,42,.55))
-    drop-shadow(0 -0.6px 0 rgba(15,23,42,.55));
-}
+.cat-icon svg{width:16px;height:16px;display:block;filter:drop-shadow(0.6px 0 0 rgba(15,23,42,.55)) drop-shadow(-0.6px 0 0 rgba(15,23,42,.55)) drop-shadow(0 0.6px 0 rgba(15,23,42,.55)) drop-shadow(0 -0.6px 0 rgba(15,23,42,.55))}
 .design{font-weight:600;font-size:13.5px;margin-bottom:3px}
 .design small{display:block;color:var(--muted);font-weight:400;font-size:11.5px;margin-top:1px}
 .len .val{font-weight:600;font-size:13px}
@@ -244,92 +237,33 @@ textarea{resize:vertical;min-height:60px}
 .view-action-btn.danger svg{color:var(--danger)}
 .copy-btn{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;padding:0;border:1px solid var(--border);background:#fff;border-radius:6px;cursor:pointer;color:#94a3b8;flex-shrink:0;line-height:0}
 .copy-btn svg{width:12px;height:12px}
-
-/* ============ ЭТИКЕТКИ ============ */
 #printArea{display:none}
 .label-sheet{display:flex;flex-wrap:wrap;gap:6mm;padding:6mm}
-.label{
-  width:58mm;height:38mm;
-  border:1px dashed #bbb;border-radius:2mm;
-  padding:2mm 2.5mm;
-  display:flex;flex-direction:column;
-  page-break-inside:avoid;break-inside:avoid;
-  background:#fff;
-  overflow:hidden;
-  box-sizing:border-box;
-}
+.label{width:58mm;height:38mm;border:1px dashed #bbb;border-radius:2mm;padding:2mm 2.5mm;display:flex;flex-direction:column;page-break-inside:avoid;break-inside:avoid;background:#fff;overflow:hidden;box-sizing:border-box}
 .label > *{min-height:0;min-width:0}
 .label .lbl-top{display:flex;flex-direction:column;gap:.3mm;flex:0 0 auto}
-.label .lbl-desig{
-  font-size:10pt;font-weight:700;line-height:1.15;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-  max-width:100%;
-}
-.label .lbl-sub{
-  font-size:7.5pt;color:#555;line-height:1.15;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-  max-width:100%;
-}
-.label .lbl-barcode{
-  flex:1 1 auto;min-height:0;
-  display:flex;align-items:center;justify-content:center;
-  padding:.5mm 0 0;overflow:hidden;
-}
-.label .lbl-barcode svg{
-  width:100%;max-width:100%;height:100%;max-height:10mm;
-  display:block;
-}
-.label .lbl-barcode-num{
-  font-family:ui-monospace,monospace;
-  font-size:7pt;line-height:1;
-  text-align:center;letter-spacing:.08em;
-  color:#000;
-  padding:.4mm 0 .3mm;
-  flex:0 0 auto;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-}
-.label .lbl-foot{
-  display:flex;justify-content:space-between;align-items:flex-end;
-  gap:2mm;font-size:7pt;line-height:1.2;
-  flex:0 0 auto;
-}
-.label .lbl-cell{
-  font-family:ui-monospace,monospace;font-weight:700;
-  background:#f0f0f0;padding:.6mm 1.4mm;border-radius:1mm;
-  font-size:8.5pt;display:inline-block;max-width:100%;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-}
+.label .lbl-desig{font-size:10pt;font-weight:700;line-height:1.15;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.label .lbl-sub{font-size:7.5pt;color:#555;line-height:1.15;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.label .lbl-barcode{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center;padding:.5mm 0 0;overflow:hidden}
+.label .lbl-barcode svg{width:100%;max-width:100%;height:100%;max-height:10mm;display:block}
+.label .lbl-barcode-num{font-family:ui-monospace,monospace;font-size:7pt;line-height:1;text-align:center;letter-spacing:.08em;color:#000;padding:.4mm 0 .3mm;flex:0 0 auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.label .lbl-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:2mm;font-size:7pt;line-height:1.2;flex:0 0 auto}
+.label .lbl-cell{font-family:ui-monospace,monospace;font-weight:700;background:#f0f0f0;padding:.6mm 1.4mm;border-radius:1mm;font-size:8.5pt;display:inline-block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .label .lbl-qty{font-weight:700;white-space:nowrap}
 .label .lbl-wh{color:#666;font-size:6.5pt;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
-
 .print-list{font-size:11px;width:100%;border-collapse:collapse}
 .print-list th,.print-list td{border:1px solid #999;padding:4px 6px;text-align:left}
 .print-list th{background:#eee;font-weight:600}
 .print-title{font-size:15pt;font-weight:700;padding:6mm 6mm 2mm;margin:0}
 .print-sub{font-size:9pt;color:#666;padding:0 6mm 4mm;margin:0}
 .print-wrap{padding:0 6mm 6mm}
-
-/* ============ ПЕЧАТЬ ============ */
 @media print{
   html,body{background:#fff !important;margin:0 !important;padding:0 !important;color:#000}
   body *{visibility:hidden !important;box-shadow:none !important;animation:none !important;transition:none !important;filter:none !important}
   #printArea,#printArea *{visibility:visible !important}
-  #printArea{
-    display:block !important;
-    position:absolute !important;
-    left:0 !important;top:0 !important;
-    width:100% !important;margin:0 !important;padding:0 !important;
-    z-index:99999 !important;
-  }
+  #printArea{display:block !important;position:absolute !important;left:0 !important;top:0 !important;width:100% !important;margin:0 !important;padding:0 !important;z-index:99999 !important}
   #printArea .label-sheet{display:flex !important;flex-wrap:wrap !important;gap:6mm !important;padding:6mm !important}
-  #printArea .label{
-    width:58mm !important;height:38mm !important;
-    border:1px dashed #ccc !important;border-radius:2mm !important;
-    padding:2mm 2.5mm !important;
-    display:flex !important;flex-direction:column !important;
-    page-break-inside:avoid !important;break-inside:avoid !important;
-    background:#fff !important;overflow:hidden !important;
-  }
+  #printArea .label{width:58mm !important;height:38mm !important;border:1px dashed #ccc !important;border-radius:2mm !important;padding:2mm 2.5mm !important;display:flex !important;flex-direction:column !important;page-break-inside:avoid !important;break-inside:avoid !important;background:#fff !important;overflow:hidden !important}
   #printArea .label > *{min-height:0 !important;min-width:0 !important}
   #printArea .label .lbl-top{display:flex !important;flex-direction:column !important;gap:.3mm !important;flex:0 0 auto !important}
   #printArea .label .lbl-desig{font-size:10pt !important;font-weight:700 !important;line-height:1.15 !important;overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important;max-width:100% !important}
@@ -346,7 +280,6 @@ textarea{resize:vertical;min-height:60px}
   #printArea .print-list th{background:#eaeaea !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
   @page{size:A4 portrait;margin:8mm}
 }
-
 .mobile-nav{display:none;position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--border);z-index:50;padding:6px 4px calc(6px + var(--sb));box-shadow:0 -4px 20px rgba(15,23,42,.06);justify-content:space-around;align-items:flex-end}
 .mobile-nav button{flex:1;background:transparent;border:none;padding:4px 2px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:9.5px;color:var(--muted);cursor:pointer;font-family:inherit;min-height:48px;justify-content:center}
 .mobile-nav button.active{color:var(--accent)}
@@ -379,23 +312,8 @@ textarea{resize:vertical;min-height:60px}
 .import-mode input[type=radio]{margin-top:3px;flex-shrink:0}
 .import-mode > div{flex:1}
 .import-mode .hint{margin-top:2px}
-
-/* ============ ЭКРАН ВХОДА ============ */
-#authScreen{
-  position:fixed;inset:0;
-  background:radial-gradient(circle at 20% 20%,#1e293b 0%,#0f172a 60%,#020617 100%);
-  z-index:9999;
-  display:flex;align-items:center;justify-content:center;
-  padding:20px;overflow-y:auto;
-}
-.auth-card{
-  background:#fff;border-radius:20px;
-  max-width:400px;width:100%;
-  padding:30px 26px 24px;
-  box-shadow:0 24px 70px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.05);
-  margin:auto;
-  animation:authIn .35s ease;
-}
+#authScreen{position:fixed;inset:0;background:radial-gradient(circle at 20% 20%,#1e293b 0%,#0f172a 60%,#020617 100%);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
+.auth-card{background:#fff;border-radius:20px;max-width:400px;width:100%;padding:30px 26px 24px;box-shadow:0 24px 70px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.05);margin:auto;animation:authIn .35s ease}
 @keyframes authIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .auth-logo{width:56px;height:56px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;border-radius:16px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;font-weight:800;font-size:22px;box-shadow:0 8px 24px rgba(79,70,229,.35);overflow:hidden}
 .auth-logo svg,.auth-logo img{width:70%;height:70%;object-fit:contain}
@@ -410,17 +328,18 @@ textarea{resize:vertical;min-height:60px}
 .auth-form input:focus{border-color:#4f46e5;outline:none;box-shadow:0 0 0 3px rgba(79,70,229,.12)}
 .auth-form button[type=submit]{padding:12px;border:none;border-radius:8px;background:#4f46e5;color:#fff;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit}
 .auth-form button[type=submit]:disabled{opacity:.6}
+.auth-link{background:none;border:none;color:#4f46e5;font-size:12.5px;cursor:pointer;font-family:inherit;padding:6px 0;text-align:right;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px}
+.auth-link:hover{color:#4338ca}
 .auth-sep{display:flex;align-items:center;gap:10px;margin:20px 0;color:#94a3b8;font-size:12px}
 .auth-sep div{flex:1;height:1px;background:#e6e9f0}
-.auth-error{color:#dc2626;font-size:13px;margin-top:14px;min-height:18px;text-align:center}
-.auth-foot{text-align:center;margin-top:14px;font-size:11.5px;color:#94a3b8}
+.auth-error{color:#dc2626;font-size:12.5px;margin-top:14px;min-height:18px;text-align:center;line-height:1.4}
+.auth-info{background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#0369a1;margin-top:14px;line-height:1.45}
+.auth-foot{text-align:center;margin-top:14px;font-size:11.5px;color:#94a3b8;line-height:1.4}
 .tg-wrap{margin-top:0;display:flex;flex-direction:column;align-items:center;gap:8px}
 .tg-hint{font-size:11.5px;color:#94a3b8;text-align:center}
-
 .invite-row{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#f8fafc;border-radius:7px;font-size:13px;margin-top:6px}
 .invite-row .em{flex:1;font-family:monospace}
 .invite-row button{background:transparent;border:none;color:#dc2626;cursor:pointer;padding:4px;border-radius:5px;line-height:0}
-
 @media (max-width:900px){.hide-sm{display:none}th.actions-col{width:auto}}
 @media (max-width:768px){
 header{padding:6px 10px;gap:8px;height:calc(52px + var(--st));padding-top:var(--st);flex-wrap:nowrap}
@@ -466,27 +385,9 @@ input,select,textarea{font-size:16px !important;min-height:44px}
 .action-btn span{display:none}
 .row-actions{grid-template-columns:repeat(6,1fr)}
 }
-
-/* ============ СТРАХОВКА ДЛЯ ЭКРАНА ВХОДА (перебивает конфликты) ============ */
-#authScreen{
-  position:fixed !important;
-  top:0 !important;right:0 !important;bottom:0 !important;left:0 !important;
-  display:flex !important;
-  align-items:center !important;justify-content:center !important;
-  background:radial-gradient(circle at 20% 20%,#1e293b 0%,#0f172a 60%,#020617 100%) !important;
-  z-index:9999 !important;
-  padding:20px !important;
-  overflow-y:auto !important;
-}
-#authScreen .auth-card{
-  background:#fff !important;
-  border-radius:20px !important;
-  max-width:400px !important;
-  width:100% !important;
-  padding:30px 26px 24px !important;
-  box-shadow:0 24px 70px rgba(0,0,0,.5) !important;
-  margin:auto !important;
-}
+/* Страховка для экрана входа */
+#authScreen{position:fixed !important;top:0 !important;right:0 !important;bottom:0 !important;left:0 !important;display:flex !important;align-items:center !important;justify-content:center !important;background:radial-gradient(circle at 20% 20%,#1e293b 0%,#0f172a 60%,#020617 100%) !important;z-index:9999 !important;padding:20px !important;overflow-y:auto !important}
+#authScreen .auth-card{background:#fff !important;border-radius:20px !important;max-width:400px !important;width:100% !important;padding:30px 26px 24px !important;box-shadow:0 24px 70px rgba(0,0,0,.5) !important;margin:auto !important}
 </style>
 </head>
 <body>
@@ -495,7 +396,7 @@ input,select,textarea{font-size:16px !important;min-height:44px}
   <div class="auth-card">
     <div class="auth-logo" id="authLogo">С</div>
     <h1>Складской учёт</h1>
-    <p class="sub">Войдите, чтобы продолжить</p>
+    <p class="sub" id="authSub">Войдите, чтобы продолжить</p>
     <div class="auth-tabs">
       <button id="tabLogin" type="button" class="active">Вход</button>
       <button id="tabRegister" type="button">Регистрация</button>
@@ -506,6 +407,7 @@ input,select,textarea{font-size:16px !important;min-height:44px}
       <div id="authUsernameRow" style="display:none"><label>Логин (username)</label><input id="authUsername" type="text" autocomplete="username" placeholder="username"></div>
       <div><label>Пароль</label><input id="authPassword" type="password" required minlength="6" autocomplete="current-password"></div>
       <button id="authSubmit" type="submit">Войти</button>
+      <button type="button" class="auth-link" id="btnForgotPassword">Забыли пароль?</button>
     </form>
     <div class="auth-sep"><div></div>или<div></div></div>
     <div class="tg-wrap">
@@ -517,11 +419,33 @@ input,select,textarea{font-size:16px !important;min-height:44px}
       <div class="tg-hint">Быстрый вход, если ваш Telegram привязан к профилю</div>
     </div>
     <div class="auth-error" id="authError"></div>
+    <div class="auth-info" id="authInfo" style="display:none"></div>
     <div class="auth-foot">
       Регистрация по приглашению. Первый пользователь становится администратором.
     </div>
   </div>
 </div>
+
+<!-- Модалка: сброс пароля -->
+<div class="modal" id="modalForgot"><div class="modal-box" style="max-width:420px">
+  <div class="modal-head"><h2>Сброс пароля</h2><button class="close" data-close><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <form id="forgotForm"><div class="modal-body">
+    <p style="margin-top:0;color:var(--muted);font-size:13px">Введите email — мы отправим письмо со ссылкой для установки нового пароля.</p>
+    <div><label>Email</label><input type="email" id="forgotEmail" required autocomplete="email"></div>
+    <div class="auth-error" id="forgotError"></div>
+  </div><div class="modal-foot"><button type="button" class="btn" data-close>Отмена</button><button type="submit" class="btn primary" id="forgotSubmit">Отправить</button></div></form>
+</div></div>
+
+<!-- Модалка: новый пароль после перехода по ссылке -->
+<div class="modal" id="modalReset"><div class="modal-box" style="max-width:420px">
+  <div class="modal-head"><h2>Новый пароль</h2></div>
+  <form id="resetForm"><div class="modal-body">
+    <p style="margin-top:0;color:var(--muted);font-size:13px">Придумайте новый пароль (минимум 6 символов).</p>
+    <div><label>Новый пароль</label><input type="password" id="resetPassword" required minlength="6"></div>
+    <div style="margin-top:10px"><label>Повторите пароль</label><input type="password" id="resetPassword2" required minlength="6"></div>
+    <div class="auth-error" id="resetError"></div>
+  </div><div class="modal-foot"><button type="submit" class="btn primary" id="resetSubmit">Сохранить</button></div></form>
+</div></div>
 
 <div id="appRoot" style="display:none">
 <div class="bg-logo" id="bgLogo"></div>
@@ -585,106 +509,57 @@ input,select,textarea{font-size:16px !important;min-height:44px}
 
 <!-- ЕЩЁ -->
 <div class="sheet" id="sheetMenu"><div class="sheet-bg" data-sheet-close></div><div class="sheet-body"><div class="sheet-handle"></div>
-
 <div class="sheet-title">📥 Импорт данных</div>
 <button class="sheet-item" data-sheet-action="import"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Импорт (JSON или XLSX)</button>
-
 <div class="sheet-title">📤 Экспорт данных</div>
 <button class="sheet-item" data-sheet-action="export"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Экспорт (JSON, XLSX, CSV)</button>
-
 <div class="sheet-title">🖨 Печать</div>
 <button class="sheet-item" data-sheet-action="print-list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Ведомость остатков</button>
 <button class="sheet-item" data-sheet-action="print-labels"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Этикетки со штрих-кодами</button>
 <button class="sheet-item" data-sheet-action="share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/></svg>Поделиться списком</button>
-
 <div class="sheet-title">⚙️ Система</div>
 <button class="sheet-item" data-sheet-action="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m11-7h-6M7 12H1"/></svg>Настройки склада</button>
 <button class="sheet-item" data-sheet-action="profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Мой профиль</button>
 <button class="sheet-item danger" data-sheet-action="logout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Выйти из аккаунта</button>
-
 </div></div>
 
-<!-- Поделиться -->
 <div class="sheet" id="sheetShare"><div class="sheet-bg" data-sheet-close></div><div class="sheet-body"><div class="sheet-handle"></div><div class="sheet-title">Поделиться списком</div>
 <button class="sheet-item" data-share="native"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/></svg>Отправить в мессенджер</button>
 <button class="sheet-item" data-share="copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Скопировать как текст</button>
 </div></div>
 
-<!-- ИМПОРТ МОДАЛ -->
+<!-- ИМПОРТ -->
 <div class="modal" id="modalImport"><div class="modal-box" style="max-width:560px">
   <div class="modal-head"><h2>Импорт данных</h2><button class="close" data-close><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
   <div class="modal-body">
     <div id="importStage1">
       <p style="margin-top:0;color:var(--muted);font-size:13px">Выберите формат файла:</p>
       <div class="import-cards">
-        <button type="button" class="import-card" data-import-type="json">
-          <div class="import-card-icon">📄</div>
-          <div class="import-card-title">JSON</div>
-          <div class="import-card-desc">Файл резервной копии</div>
-        </button>
-        <button type="button" class="import-card" data-import-type="xlsx">
-          <div class="import-card-icon">📊</div>
-          <div class="import-card-title">Excel (XLSX)</div>
-          <div class="import-card-desc">Таблица с колонками</div>
-        </button>
+        <button type="button" class="import-card" data-import-type="json"><div class="import-card-icon">📄</div><div class="import-card-title">JSON</div><div class="import-card-desc">Файл резервной копии</div></button>
+        <button type="button" class="import-card" data-import-type="xlsx"><div class="import-card-icon">📊</div><div class="import-card-title">Excel (XLSX)</div><div class="import-card-desc">Таблица с колонками</div></button>
       </div>
-      <div class="hint" style="margin-top:14px">
-        Excel: колонки распознаются автоматически. Поддерживаются заголовки
-        «Наименование», «Обозначение» / «Функция», «Ссылка» / «URL» / «Вариант закупки»,
-        «шт/м» / «Кол-во», «Цена».
-      </div>
+      <div class="hint" style="margin-top:14px">Excel: колонки распознаются автоматически. Заголовки: «Наименование», «Обозначение»/«Функция», «Ссылка»/«URL», «шт/м»/«Кол-во», «Цена».</div>
     </div>
     <div id="importStage2" style="display:none">
       <div class="import-summary" id="importSummary"></div>
       <label style="font-weight:600;margin-bottom:8px;display:block">Режим импорта</label>
-      <label class="import-mode">
-        <input type="radio" name="importMode" value="append" checked>
-        <div>
-          <b>Добавить к существующим</b>
-          <div class="hint">Позиции с совпадающими ID обновятся, остальные добавятся</div>
-        </div>
-      </label>
-      <label class="import-mode">
-        <input type="radio" name="importMode" value="replace">
-        <div>
-          <b>Заменить всё</b>
-          <div class="hint">Все текущие позиции будут удалены и заменены новыми</div>
-        </div>
-      </label>
+      <label class="import-mode"><input type="radio" name="importMode" value="append" checked><div><b>Добавить к существующим</b><div class="hint">Позиции с совпадающими ID обновятся</div></div></label>
+      <label class="import-mode"><input type="radio" name="importMode" value="replace"><div><b>Заменить всё</b><div class="hint">Все текущие позиции будут удалены</div></div></label>
     </div>
   </div>
-  <div class="modal-foot">
-    <button type="button" class="btn" data-close>Отмена</button>
-    <button type="button" class="btn primary" id="btnImportConfirm" disabled>Импортировать</button>
-  </div>
+  <div class="modal-foot"><button type="button" class="btn" data-close>Отмена</button><button type="button" class="btn primary" id="btnImportConfirm" disabled>Импортировать</button></div>
 </div></div>
 
-<!-- ЭКСПОРТ МОДАЛ -->
+<!-- ЭКСПОРТ -->
 <div class="modal" id="modalExport"><div class="modal-box" style="max-width:560px">
   <div class="modal-head"><h2>Экспорт данных</h2><button class="close" data-close><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
   <div class="modal-body">
     <p style="margin-top:0;color:var(--muted);font-size:13px">Выберите формат:</p>
     <div class="import-cards" style="grid-template-columns:1fr 1fr">
-      <button type="button" class="import-card" data-export-type="json">
-        <div class="import-card-icon">💾</div>
-        <div class="import-card-title">JSON</div>
-        <div class="import-card-desc">Резервная копия</div>
-      </button>
-      <button type="button" class="import-card" data-export-type="xlsx">
-        <div class="import-card-icon">📊</div>
-        <div class="import-card-title">XLSX</div>
-        <div class="import-card-desc">Склад в Excel</div>
-      </button>
-      <button type="button" class="import-card" data-export-type="dash-xlsx">
-        <div class="import-card-icon">📈</div>
-        <div class="import-card-title">Отчёт</div>
-        <div class="import-card-desc">Проекты в Excel</div>
-      </button>
-      <button type="button" class="import-card" data-export-type="csv">
-        <div class="import-card-icon">📃</div>
-        <div class="import-card-title">CSV</div>
-        <div class="import-card-desc">Универсальный</div>
-      </button>
+      <button type="button" class="import-card" data-export-type="json"><div class="import-card-icon">💾</div><div class="import-card-title">JSON</div><div class="import-card-desc">Резервная копия</div></button>
+      <button type="button" class="import-card" data-export-type="xlsx"><div class="import-card-icon">📊</div><div class="import-card-title">XLSX</div><div class="import-card-desc">Склад в Excel</div></button>
+      <button type="button" class="import-card" data-export-type="dash-xlsx"><div class="import-card-icon">📈</div><div class="import-card-title">Отчёт</div><div class="import-card-desc">Проекты в Excel</div></button>
+      <button type="button" class="import-card" data-export-type="csv"><div class="import-card-icon">📃</div><div class="import-card-title">CSV</div><div class="import-card-desc">Универсальный</div></button>
     </div>
   </div>
   <div class="modal-foot"><button type="button" class="btn" data-close>Закрыть</button></div>
@@ -806,7 +681,6 @@ input,select,textarea{font-size:16px !important;min-height:44px}
 
 </div><!-- appRoot -->
 
-<!-- Печатаемая зона — прямым ребёнком body -->
 <div id="printArea"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -816,13 +690,11 @@ input,select,textarea{font-size:16px !important;min-height:44px}
 'use strict';
 
 function boot(){
-  // Ждём Supabase SDK с CDN (макс ~15 сек)
   if(!window.supabase || typeof window.supabase.createClient!=='function'){
     if(!window.__skladWaitLogged){console.warn('[SKLAD] Жду Supabase SDK...');window.__skladWaitLogged=true;}
     setTimeout(boot,80);
     return;
   }
-
 try{
 
 var SUPABASE_URL='https://nzvvdwiyzlgwgmndrebl.supabase.co';
@@ -881,34 +753,132 @@ function tokenize(s){var n=normStr(s);return n?n.split(' ').filter(Boolean):[];}
 function buildBlob(it){var cat=categoryOf(it.category);var parts=[it.designation,it.name,it.supplier,it.article,it.link,it.barcode,it.project,it.machine,it.manufacturer,it.warehouse,locStr(it),cat?cat.label:''];if(it.fields)for(var k in it.fields)if(it.fields.hasOwnProperty(k))parts.push(it.fields[k]);return parts.filter(Boolean).join(' ');}
 function matchScore(tokens,it){var blob=normStr(buildBlob(it));if(!tokens.length)return 1;var total=0;for(var i=0;i<tokens.length;i++){var t=tokens[i];var best=blob.indexOf(t)!==-1?(blob.indexOf(t)===0?1:0.9):0;total+=best;}return total/tokens.length;}
 
-/* AUTH */
-function setAuthMode(m){authMode=m;$('#authNameRow').style.display=m==='register'?'block':'none';$('#authUsernameRow').style.display=m==='register'?'block':'none';$('#authSubmit').textContent=m==='login'?'Войти':'Создать аккаунт';$('#tabLogin').classList.toggle('active',m==='login');$('#tabRegister').classList.toggle('active',m==='register');}
+/* ============ AUTH ============ */
+function setAuthMode(m){
+  authMode=m;
+  $('#authNameRow').style.display=m==='register'?'block':'none';
+  $('#authUsernameRow').style.display=m==='register'?'block':'none';
+  $('#authSubmit').textContent=m==='login'?'Войти':'Создать аккаунт';
+  $('#tabLogin').classList.toggle('active',m==='login');
+  $('#tabRegister').classList.toggle('active',m==='register');
+  var fg=$('#btnForgotPassword');if(fg)fg.style.display=m==='login'?'inline-block':'none';
+  $('#authSub').textContent=m==='register'?'Создайте аккаунт':'Войдите, чтобы продолжить';
+  setAuthError('');
+  setAuthInfo('');
+}
+function setAuthError(msg,isOk){
+  var e=$('#authError');if(!e)return;
+  e.textContent=msg||'';
+  e.style.color=isOk?'#059669':'#dc2626';
+}
+function setAuthInfo(msg){
+  var i=$('#authInfo');if(!i)return;
+  if(!msg){i.style.display='none';i.textContent='';return;}
+  i.style.display='block';i.textContent=msg;
+}
 $('#tabLogin').addEventListener('click',function(){setAuthMode('login');});
 $('#tabRegister').addEventListener('click',function(){setAuthMode('register');});
+
 $('#authForm').addEventListener('submit',async function(e){
   e.preventDefault();
-  var email=$('#authEmail').value.trim();
+  var email=$('#authEmail').value.trim().toLowerCase();
   var password=$('#authPassword').value;
   var name=$('#authName').value.trim();
   var username=$('#authUsername').value.trim();
-  var err=$('#authError');var btn=$('#authSubmit');
-  err.textContent='';err.style.color='#dc2626';
+  var btn=$('#authSubmit');
+  setAuthError('');setAuthInfo('');
   btn.disabled=true;btn.textContent='Подождите...';
   try{
-    if(authMode==='login'){var r=await sb.auth.signInWithPassword({email:email,password:password});if(r.error)throw r.error;}
-    else{
+    if(authMode==='login'){
+      var r=await sb.auth.signInWithPassword({email:email,password:password});
+      if(r.error){
+        var m=r.error.message||'';
+        if(/invalid login credentials/i.test(m)){
+          setAuthError('Неверный email или пароль.\nЕсли пароль забыт — нажмите «Забыли пароль?».\nЕсли аккаунт только что создан — подтвердите email.');
+        }else if(/email not confirmed/i.test(m)){
+          setAuthError('Email не подтверждён. Проверьте почту и перейдите по ссылке.');
+        }else{
+          setAuthError(m);
+        }
+      }
+    }else{
       var meta={display_name:name||email.split('@')[0]};
       if(username)meta.username=username;
       var r2=await sb.auth.signUp({email:email,password:password,options:{data:meta}});
-      if(r2.error)throw r2.error;
-      if(r2.data&&r2.data.user&&!r2.data.session){err.style.color='#059669';err.textContent='Аккаунт создан. Войдите.';}
+      if(r2.error){
+        var m2=r2.error.message||'';
+        if(/already registered|already exists|user already/i.test(m2)){
+          setAuthError('Такой email уже зарегистрирован. Попробуйте войти.');
+          setAuthMode('login');
+          $('#authEmail').value=email;
+        }else{
+          setAuthError(m2);
+        }
+      }else if(r2.data&&r2.data.user&&!r2.data.session){
+        setAuthError('Аккаунт создан. Подтвердите email (проверьте почту), затем войдите.',true);
+        setAuthInfo('Письмо отправлено на '+email+' — проверьте «Спам».');
+        setAuthMode('login');
+        $('#authEmail').value=email;
+      }
     }
-  }catch(err2){err.style.color='#dc2626';err.textContent=err2.message||String(err2);}
+  }catch(err2){
+    setAuthError(err2.message||String(err2));
+  }
   btn.disabled=false;btn.textContent=authMode==='login'?'Войти':'Создать аккаунт';
 });
+
+/* Забыли пароль */
+$('#btnForgotPassword').addEventListener('click',function(){
+  var em=$('#authEmail').value.trim();
+  var fe=$('#forgotEmail');
+  if(em)fe.value=em;
+  $('#forgotError').textContent='';
+  openModal('#modalForgot');
+});
+$('#forgotForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  var email=$('#forgotEmail').value.trim().toLowerCase();
+  var err=$('#forgotError');var btn=$('#forgotSubmit');
+  err.textContent='';err.style.color='#dc2626';
+  if(!email){err.textContent='Введите email';return;}
+  btn.disabled=true;btn.textContent='Отправка...';
+  try{
+    var redirectTo=window.location.origin+window.location.pathname;
+    var r=await sb.auth.resetPasswordForEmail(email,{redirectTo:redirectTo});
+    if(r.error)throw r.error;
+    err.style.color='#059669';
+    err.textContent='Письмо отправлено. Проверьте почту (и «Спам»).';
+    setTimeout(function(){closeModal('#modalForgot');},2000);
+  }catch(err2){
+    err.textContent=err2.message||String(err2);
+  }
+  btn.disabled=false;btn.textContent='Отправить';
+});
+
+/* Новый пароль после перехода по ссылке */
+$('#resetForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  var p1=$('#resetPassword').value;
+  var p2=$('#resetPassword2').value;
+  var err=$('#resetError');var btn=$('#resetSubmit');
+  err.textContent='';err.style.color='#dc2626';
+  if(p1.length<6){err.textContent='Пароль минимум 6 символов';return;}
+  if(p1!==p2){err.textContent='Пароли не совпадают';return;}
+  btn.disabled=true;btn.textContent='Сохранение...';
+  try{
+    var r=await sb.auth.updateUser({password:p1});
+    if(r.error)throw r.error;
+    err.style.color='#059669';
+    err.textContent='Пароль обновлён! Входим...';
+    setTimeout(function(){closeModal('#modalReset');},1200);
+  }catch(err2){
+    err.textContent=err2.message||String(err2);
+  }
+  btn.disabled=false;btn.textContent='Сохранить';
+});
+
 window.onTelegramAuth=async function(tgUser){
-  var err=$('#authError');
-  err.style.color='#64748b'; err.textContent='Проверка Telegram…';
+  setAuthError('');setAuthInfo('Проверка Telegram…');
   try{
     var res=await fetch(SUPABASE_URL+'/functions/v1/telegram-auth',{
       method:'POST',
@@ -916,17 +886,32 @@ window.onTelegramAuth=async function(tgUser){
       body:JSON.stringify(tgUser)
     });
     var data=await res.json();
-    if(!res.ok||!data.token_hash) throw new Error(data.error||'Telegram auth failed');
+    if(!res.ok||!data.token_hash){
+      throw new Error(data.error||('Ошибка сервера: '+res.status));
+    }
     var v=await sb.auth.verifyOtp({token_hash:data.token_hash,type:'magiclink'});
     if(v.error) throw v.error;
-    err.textContent='';
+    setAuthInfo('');
   }catch(e){
     console.error('[TG]',e);
-    err.style.color='#dc2626';
-    err.textContent=(e&&e.message)||String(e);
+    setAuthInfo('');
+    var m=e&&e.message||String(e);
+    if(/Failed to fetch|network/i.test(m)){
+      setAuthError('Сервер Telegram-входа недоступен. Разверните Edge Function telegram-auth.');
+    }else{
+      setAuthError('Telegram: '+m);
+    }
   }
 };
+
 sb.auth.onAuthStateChange(async function(event,session){
+  console.log('[AUTH]',event);
+  if(event==='PASSWORD_RECOVERY'){
+    openModal('#modalReset');
+    $('#resetPassword').value='';$('#resetPassword2').value='';
+    $('#resetError').textContent='';
+    return;
+  }
   if(session&&session.user){
     currentUser=session.user;
     $('#authScreen').style.display='none';$('#appRoot').style.display='block';
@@ -956,7 +941,7 @@ async function loadProfile(user){
       var dname=meta.display_name||meta.full_name||uname;
       var avurl=meta.avatar_url||meta.picture||null;
       var ins=await sb.from('profiles').insert({id:user.id,email:user.email,username:uname,display_name:dname,avatar_url:avurl});
-      if(ins.error)console.warn('profile insert err',ins.error);
+      if(ins.error)console.warn('[profile insert]',ins.error);
       userProfile={id:user.id,email:user.email,username:uname,display_name:dname,avatar_url:avurl};
     }
   }catch(e){
@@ -1766,7 +1751,6 @@ async function doImport(arr,mode){
   renderAll();
 }
 
-/* ЭКСПОРТ */
 document.addEventListener('click',function(e){
   var card=e.target.closest('[data-export-type]');
   if(!card)return;
@@ -1780,7 +1764,7 @@ document.addEventListener('click',function(e){
   },150);
 });
 
-/* ================== SCANNER / PRINT / PURCHASE / XLSX / CSV / SHARE ================== */
+/* SCANNER / PRINT / PURCHASE */
 function startScanner(){
   if(typeof Quagga==='undefined'){$('#scanInfo').textContent='Библиотека не загрузилась';return;}
   if(scannerActive)return;
@@ -1841,7 +1825,6 @@ function printLabelsFor(ids){
   var area=document.getElementById('printArea');
   if(!area){toast('Не найден #printArea','err');console.error('[PRINT] #printArea отсутствует в DOM');return;}
   if(area.parentNode!==document.body){console.warn('[PRINT] #printArea не прямой ребёнок <body>, переношу');document.body.appendChild(area);}
-
   var labels='';
   for(var j=0;j<list.length;j++){
     var it2=list[j];
@@ -1850,22 +1833,7 @@ function printLabelsFor(ids){
     var cat=categoryOf(it2.category);
     var specs=specsOf(it2);
     if(specs==='—'&&cat)specs=cat.label;
-    labels+=
-      '<div class="label">'+
-        '<div class="lbl-top">'+
-          '<div class="lbl-desig" title="'+escAttr(it2.designation||'')+'">'+esc(it2.designation||'—')+'</div>'+
-          '<div class="lbl-sub" title="'+escAttr(specs)+'">'+esc(specs)+'</div>'+
-        '</div>'+
-        '<div class="lbl-barcode">'+code39SVG(code)+'</div>'+
-        '<div class="lbl-barcode-num">'+esc(code)+'</div>'+
-        '<div class="lbl-foot">'+
-          '<div style="min-width:0;flex:1">'+
-            '<div class="lbl-wh">'+esc(it2.warehouse||'')+'</div>'+
-            '<span class="lbl-cell">'+(esc(locStr(it2))||'—')+'</span>'+
-          '</div>'+
-          '<div class="lbl-qty">'+qty+'</div>'+
-        '</div>'+
-      '</div>';
+    labels+='<div class="label"><div class="lbl-top"><div class="lbl-desig" title="'+escAttr(it2.designation||'')+'">'+esc(it2.designation||'—')+'</div><div class="lbl-sub" title="'+escAttr(specs)+'">'+esc(specs)+'</div></div><div class="lbl-barcode">'+code39SVG(code)+'</div><div class="lbl-barcode-num">'+esc(code)+'</div><div class="lbl-foot"><div style="min-width:0;flex:1"><div class="lbl-wh">'+esc(it2.warehouse||'')+'</div><span class="lbl-cell">'+(esc(locStr(it2))||'—')+'</span></div><div class="lbl-qty">'+qty+'</div></div></div>';
   }
   area.innerHTML='<div class="label-sheet">'+labels+'</div>';
   setTimeout(function(){console.log('[PRINT] Открываю диалог печати. Этикеток:',list.length);window.print();},150);
@@ -1920,7 +1888,6 @@ async function openSettings(){var f=$('#settingsForm');if(!f)return;var w=fld(f,
 async function submitSettings(e){e.preventDefault();var f=e.target;var wv=fld(f,'warehouses'),pv=fld(f,'projects'),mv=fld(f,'machines'),cv=fld(f,'categories');if(wv){settings.warehouses=wv.value.split('\n').map(function(s){return s.trim();}).filter(Boolean);if(!settings.warehouses.length)settings.warehouses=['Основной'];}if(pv)settings.projects=pv.value.split('\n').map(function(s){return s.trim();}).filter(Boolean);if(mv)settings.machines=mv.value.split('\n').map(function(s){return s.trim();}).filter(Boolean);if(cv){try{var cats=JSON.parse(cv.value);if(Array.isArray(cats)&&cats.length)settings.categories=cats;}catch(e1){toast('Ошибка JSON','err');return;}}var cu=fld(f,'currency');if(cu)settings.currency=cu.value.trim()||'₽';var lt=fld(f,'lowThreshold');if(lt)settings.lowThreshold=Math.max(1,Math.min(99,+lt.value||20));var ct=fld(f,'critThreshold');if(ct)settings.critThreshold=Math.max(0,Math.min(50,+ct.value||5));var bp=fld(f,'barcodePrefix');if(bp)settings.barcodePrefix=(bp.value.trim()||'C').toUpperCase();var nb=fld(f,'nextBarcode');if(nb)settings.nextBarcode=Math.max(1,+nb.value||1);await saveSettingsRemote();refreshSelects();renderAll();closeModal('#modalSettings');toast('Сохранено','ok');}
 async function addInvite(){var e=$('#inviteEmail');if(!e)return;var email=e.value.trim().toLowerCase();if(!email||email.indexOf('@')===-1){toast('Введите email','err');return;}try{var r=await sb.from('invited_emails').insert({email:email,invited_by:currentUser?currentUser.id:null});if(r.error)throw r.error;e.value='';await loadInvites();toast('Email приглашён','ok');}catch(err){toast('Ошибка: '+(err.message||err),'err');}}
 
-/* ПРОФИЛЬ */
 function openProfileModal(){
   var e1=$('#profileEmail');if(e1)e1.value=(currentUser&&currentUser.email)||'';
   var u=$('#profileUsername');if(u)u.value=(userProfile&&userProfile.username)||'';
@@ -2088,10 +2055,8 @@ console.log('[SKLAD] init done');
   box.textContent='Ошибка запуска: '+err.message+'\n\n'+(err.stack||'');
   document.body.appendChild(box);
 }
-} // конец boot()
-
+}
 boot();
-
 })();
 </script>
 </body>
