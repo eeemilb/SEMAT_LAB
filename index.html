@@ -65,8 +65,15 @@ tr.group-row .group-toggle{display:inline-flex;width:18px;height:18px;margin-rig
 tr.group-row.collapsed .group-toggle{transform:rotate(-90deg)}
 tr.group-row .group-meta{color:var(--muted);font-weight:400;font-size:11.5px;margin-left:8px}
 tr.group-row .group-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:8px;vertical-align:middle}
-.cat-icon{width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
-.cat-icon svg{width:16px;height:16px;display:block}
+.cat-icon{width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:inset 0 0 0 1px rgba(15,23,42,.06)}
+.cat-icon svg{
+  width:16px;height:16px;display:block;
+  filter:
+    drop-shadow(0.6px 0 0 rgba(15,23,42,.55))
+    drop-shadow(-0.6px 0 0 rgba(15,23,42,.55))
+    drop-shadow(0 0.6px 0 rgba(15,23,42,.55))
+    drop-shadow(0 -0.6px 0 rgba(15,23,42,.55));
+}
 .design{font-weight:600;font-size:13.5px;margin-bottom:3px}
 .design small{display:block;color:var(--muted);font-weight:400;font-size:11.5px;margin-top:1px}
 .len .val{font-weight:600;font-size:13px}
@@ -238,7 +245,7 @@ textarea{resize:vertical;min-height:60px}
 .copy-btn{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;padding:0;border:1px solid var(--border);background:#fff;border-radius:6px;cursor:pointer;color:#94a3b8;flex-shrink:0;line-height:0}
 .copy-btn svg{width:12px;height:12px}
 
-/* ============ ЭТИКЕТКИ (экран + печать) ============ */
+/* ============ ЭТИКЕТКИ ============ */
 #printArea{display:none}
 .label-sheet{display:flex;flex-wrap:wrap;gap:6mm;padding:6mm}
 .label{
@@ -305,7 +312,7 @@ textarea{resize:vertical;min-height:60px}
 /* ============ ПЕЧАТЬ ============ */
 @media print{
   html,body{background:#fff !important;margin:0 !important;padding:0 !important;color:#000}
-  body *{visibility:hidden !important;box-shadow:none !important;animation:none !important;transition:none !important}
+  body *{visibility:hidden !important;box-shadow:none !important;animation:none !important;transition:none !important;filter:none !important}
   #printArea,#printArea *{visibility:visible !important}
   #printArea{
     display:block !important;
@@ -325,49 +332,18 @@ textarea{resize:vertical;min-height:60px}
   }
   #printArea .label > *{min-height:0 !important;min-width:0 !important}
   #printArea .label .lbl-top{display:flex !important;flex-direction:column !important;gap:.3mm !important;flex:0 0 auto !important}
-  #printArea .label .lbl-desig{
-    font-size:10pt !important;font-weight:700 !important;line-height:1.15 !important;
-    overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important;max-width:100% !important;
-  }
-  #printArea .label .lbl-sub{
-    font-size:7.5pt !important;color:#555 !important;line-height:1.15 !important;
-    overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important;max-width:100% !important;
-  }
-  #printArea .label .lbl-barcode{
-    flex:1 1 auto !important;min-height:0 !important;
-    display:flex !important;align-items:center !important;justify-content:center !important;
-    padding:.5mm 0 0 !important;overflow:hidden !important;
-  }
-  #printArea .label .lbl-barcode svg{
-    display:block !important;width:100% !important;max-width:100% !important;
-    height:100% !important;max-height:10mm !important;
-  }
-  #printArea .label .lbl-barcode-num{
-    font-family:ui-monospace,monospace !important;
-    font-size:7pt !important;
-    text-align:center !important;letter-spacing:.08em !important;
-    color:#000 !important;padding:.4mm 0 .3mm !important;
-    flex:0 0 auto !important;
-    overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important;
-  }
-  #printArea .label .lbl-foot{
-    display:flex !important;justify-content:space-between !important;align-items:flex-end !important;
-    gap:2mm !important;font-size:7pt !important;line-height:1.2 !important;flex:0 0 auto !important;
-  }
-  #printArea .label .lbl-cell{
-    font-family:ui-monospace,monospace !important;font-weight:700 !important;
-    background:#f0f0f0 !important;padding:.6mm 1.4mm !important;border-radius:1mm !important;
-    font-size:8.5pt !important;display:inline-block !important;max-width:100% !important;
-    overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important;
-    -webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;
-  }
+  #printArea .label .lbl-desig{font-size:10pt !important;font-weight:700 !important;line-height:1.15 !important;overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important;max-width:100% !important}
+  #printArea .label .lbl-sub{font-size:7.5pt !important;color:#555 !important;line-height:1.15 !important;overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important;max-width:100% !important}
+  #printArea .label .lbl-barcode{flex:1 1 auto !important;min-height:0 !important;display:flex !important;align-items:center !important;justify-content:center !important;padding:.5mm 0 0 !important;overflow:hidden !important}
+  #printArea .label .lbl-barcode svg{display:block !important;width:100% !important;max-width:100% !important;height:100% !important;max-height:10mm !important}
+  #printArea .label .lbl-barcode-num{font-family:ui-monospace,monospace !important;font-size:7pt !important;text-align:center !important;letter-spacing:.08em !important;color:#000 !important;padding:.4mm 0 .3mm !important;flex:0 0 auto !important;overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important}
+  #printArea .label .lbl-foot{display:flex !important;justify-content:space-between !important;align-items:flex-end !important;gap:2mm !important;font-size:7pt !important;line-height:1.2 !important;flex:0 0 auto !important}
+  #printArea .label .lbl-cell{font-family:ui-monospace,monospace !important;font-weight:700 !important;background:#f0f0f0 !important;padding:.6mm 1.4mm !important;border-radius:1mm !important;font-size:8.5pt !important;display:inline-block !important;max-width:100% !important;overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
   #printArea .label .lbl-qty{font-weight:700 !important;white-space:nowrap !important}
   #printArea .label .lbl-wh{color:#666 !important;font-size:6.5pt !important;overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important;max-width:100% !important}
-
   #printArea .print-list{border-collapse:collapse !important;width:100% !important;font-size:11pt !important}
   #printArea .print-list th,#printArea .print-list td{border:1px solid #333 !important;padding:4px 6px !important;color:#000 !important}
   #printArea .print-list th{background:#eaeaea !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
-
   @page{size:A4 portrait;margin:8mm}
 }
 
@@ -489,6 +465,27 @@ input,select,textarea{font-size:16px !important;min-height:44px}
 .mobile-nav button span{display:none}
 .action-btn span{display:none}
 .row-actions{grid-template-columns:repeat(6,1fr)}
+}
+
+/* ============ СТРАХОВКА ДЛЯ ЭКРАНА ВХОДА (перебивает конфликты) ============ */
+#authScreen{
+  position:fixed !important;
+  top:0 !important;right:0 !important;bottom:0 !important;left:0 !important;
+  display:flex !important;
+  align-items:center !important;justify-content:center !important;
+  background:radial-gradient(circle at 20% 20%,#1e293b 0%,#0f172a 60%,#020617 100%) !important;
+  z-index:9999 !important;
+  padding:20px !important;
+  overflow-y:auto !important;
+}
+#authScreen .auth-card{
+  background:#fff !important;
+  border-radius:20px !important;
+  max-width:400px !important;
+  width:100% !important;
+  padding:30px 26px 24px !important;
+  box-shadow:0 24px 70px rgba(0,0,0,.5) !important;
+  margin:auto !important;
 }
 </style>
 </head>
@@ -815,8 +812,17 @@ input,select,textarea{font-size:16px !important;min-height:44px}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/@ericblade/quagga2@1.7.7/dist/quagga.min.js"></script>
 <script>
-'use strict';
 (function(){
+'use strict';
+
+function boot(){
+  // Ждём Supabase SDK с CDN (макс ~15 сек)
+  if(!window.supabase || typeof window.supabase.createClient!=='function'){
+    if(!window.__skladWaitLogged){console.warn('[SKLAD] Жду Supabase SDK...');window.__skladWaitLogged=true;}
+    setTimeout(boot,80);
+    return;
+  }
+
 try{
 
 var SUPABASE_URL='https://nzvvdwiyzlgwgmndrebl.supabase.co';
@@ -827,11 +833,11 @@ var STATUSES={order:{label:'Заказан',fg:'#92400e',bg:'#fef3c7'},transit:{
 var STATUS_ORDER=['order','transit','stock','reserved','issued','written_off'];
 var OP_TYPES={receive:{label:'Получение',sign:+1},cut:{label:'Отрез / расход',sign:-1},return:{label:'Возврат',sign:+1},writeoff:{label:'Списание',sign:-1},invent:{label:'Инвентаризация',sign:0}};
 var CAT_ICONS={
-cables:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6 C6 4.5 10 4.5 10 6 L10 20 C10 21.5 14 21.5 14 20 L14 6 C14 4.5 18 4.5 18 6 L18 20"/><ellipse cx="8" cy="6" rx="2" ry="0.9" fill="currentColor"/><ellipse cx="16" cy="6" rx="2" ry="0.9" fill="currentColor" opacity="0.5"/></svg>',
-electrical:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 7h6M9 11h6"/><circle cx="12" cy="16" r="2"/></svg>',
-drives:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="12" r="6"/><circle cx="11" cy="12" r="2" fill="currentColor"/><path d="M17 12h4M6 8.5L8 12l-2 3.5M16 8.5L14 12l2 3.5"/></svg>',
-mechanics:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
-consumables:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7l9-3 9 3v10l-9 3-9-3z"/><path d="M3 7l9 3 9-3M12 10v10"/></svg>'
+cables:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6 C6 4.5 10 4.5 10 6 L10 20 C10 21.5 14 21.5 14 20 L14 6 C14 4.5 18 4.5 18 6 L18 20"/><ellipse cx="8" cy="6" rx="2" ry="0.9" fill="currentColor"/><ellipse cx="16" cy="6" rx="2" ry="0.9" fill="currentColor" opacity="0.5"/></svg>',
+electrical:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 7h6M9 11h6"/><circle cx="12" cy="16" r="2"/></svg>',
+drives:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="12" r="6"/><circle cx="11" cy="12" r="2" fill="currentColor"/><path d="M17 12h4M6 8.5L8 12l-2 3.5M16 8.5L14 12l2 3.5"/></svg>',
+mechanics:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+consumables:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-3 9 3v10l-9 3-9-3z"/><path d="M3 7l9 3 9-3M12 10v10"/></svg>'
 };
 var DEFAULT_CATEGORIES=[
 {id:'cables',label:'Кабели и провода',color:'#3b82f6',defaultUnit:'м',fields:[{key:'brand',label:'Марка',type:'text'},{key:'section',label:'Сечение, мм²',type:'number'},{key:'cores',label:'Число жил',type:'number'},{key:'colorName',label:'Цвет изоляции',type:'text'},{key:'color',label:'Цвет',type:'color'}]},
@@ -1760,7 +1766,7 @@ async function doImport(arr,mode){
   renderAll();
 }
 
-/* ЭКСПОРТ: обработчик карточек */
+/* ЭКСПОРТ */
 document.addEventListener('click',function(e){
   var card=e.target.closest('[data-export-type]');
   if(!card)return;
@@ -2082,6 +2088,10 @@ console.log('[SKLAD] init done');
   box.textContent='Ошибка запуска: '+err.message+'\n\n'+(err.stack||'');
   document.body.appendChild(box);
 }
+} // конец boot()
+
+boot();
+
 })();
 </script>
 </body>
