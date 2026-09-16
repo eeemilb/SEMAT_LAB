@@ -237,98 +237,214 @@ textarea{resize:vertical;min-height:60px}
 .view-action-btn.danger svg{color:var(--danger)}
 .copy-btn{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;padding:0;border:1px solid var(--border);background:#fff;border-radius:6px;cursor:pointer;color:#94a3b8;flex-shrink:0;line-height:0}
 .copy-btn svg{width:12px;height:12px}
-  
-/* Печатаемая зона скрыта на экране */
+
+/* ============ ЭТИКЕТКИ (экран + печать) ============ */
 #printArea{display:none}
+.label-sheet{display:flex;flex-wrap:wrap;gap:6mm;padding:6mm}
+.label{
+  width:58mm;height:38mm;
+  border:1px dashed #bbb;border-radius:2mm;
+  padding:2mm 2.5mm;
+  display:flex;flex-direction:column;
+  page-break-inside:avoid;break-inside:avoid;
+  background:#fff;
+  overflow:hidden;
+  box-sizing:border-box;
+}
+.label > *{min-height:0;min-width:0}
+.label .lbl-top{display:flex;flex-direction:column;gap:.3mm;flex:0 0 auto}
+.label .lbl-desig{
+  font-size:10pt;font-weight:700;line-height:1.15;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  max-width:100%;
+}
+.label .lbl-sub{
+  font-size:7.5pt;color:#555;line-height:1.15;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  max-width:100%;
+}
+.label .lbl-barcode{
+  flex:1 1 auto;min-height:0;
+  display:flex;align-items:center;justify-content:center;
+  padding:.5mm 0 0;overflow:hidden;
+}
+.label .lbl-barcode svg{
+  width:100%;max-width:100%;height:100%;max-height:10mm;
+  display:block;
+}
+.label .lbl-barcode-num{
+  font-family:ui-monospace,monospace;
+  font-size:7pt;line-height:1;
+  text-align:center;letter-spacing:.08em;
+  color:#000;
+  padding:.4mm 0 .3mm;
+  flex:0 0 auto;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.label .lbl-foot{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  gap:2mm;font-size:7pt;line-height:1.2;
+  flex:0 0 auto;
+}
+.label .lbl-cell{
+  font-family:ui-monospace,monospace;font-weight:700;
+  background:#f0f0f0;padding:.6mm 1.4mm;border-radius:1mm;
+  font-size:8.5pt;display:inline-block;max-width:100%;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.label .lbl-qty{font-weight:700;white-space:nowrap}
+.label .lbl-wh{color:#666;font-size:6.5pt;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+
+.print-list{font-size:11px;width:100%;border-collapse:collapse}
+.print-list th,.print-list td{border:1px solid #999;padding:4px 6px;text-align:left}
+.print-list th{background:#eee;font-weight:600}
+.print-title{font-size:15pt;font-weight:700;padding:6mm 6mm 2mm;margin:0}
+.print-sub{font-size:9pt;color:#666;padding:0 6mm 4mm;margin:0}
+.print-wrap{padding:0 6mm 6mm}
 
 /* ============ ПЕЧАТЬ ============ */
 @media print{
-  html,body{
-    background:#fff !important;
-    margin:0 !important;
-    padding:0 !important;
-    color:#000;
-  }
-
-  /* Скрываем ВСЁ через visibility, чтобы сохранить дерево DOM
-     (это надёжнее, чем display:none — не ломает flex/grid-расчёты) */
-  body *{
-    visibility:hidden !important;
-    box-shadow:none !important;
-    animation:none !important;
-    transition:none !important;
-  }
-
-  /* Показываем только печатаемую зону и её содержимое */
-  #printArea,
-  #printArea *{
-    visibility:visible !important;
-  }
-
-  /* Печатаемая зона — абсолютным позиционированием на всю страницу */
+  html,body{background:#fff !important;margin:0 !important;padding:0 !important;color:#000}
+  body *{visibility:hidden !important;box-shadow:none !important;animation:none !important;transition:none !important}
+  #printArea,#printArea *{visibility:visible !important}
   #printArea{
     display:block !important;
     position:absolute !important;
-    left:0 !important;
-    top:0 !important;
-    width:100% !important;
-    margin:0 !important;
-    padding:0 !important;
+    left:0 !important;top:0 !important;
+    width:100% !important;margin:0 !important;padding:0 !important;
     z-index:99999 !important;
   }
-
-  /* Лист этикеток */
-  #printArea .label-sheet{
-    display:flex !important;
-    flex-wrap:wrap !important;
-    gap:6mm !important;
-    padding:6mm !important;
-  }
-
-  /* Одна этикетка */
+  #printArea .label-sheet{display:flex !important;flex-wrap:wrap !important;gap:6mm !important;padding:6mm !important}
   #printArea .label{
-    width:58mm !important;
-    height:38mm !important;
-    border:1px dashed #ccc !important;
-    border-radius:2mm !important;
-    padding:2.5mm 3mm !important;
-    display:flex !important;
-    flex-direction:column !important;
-    justify-content:space-between !important;
-    page-break-inside:avoid !important;
-    break-inside:avoid !important;
-    background:#fff !important;
+    width:58mm !important;height:38mm !important;
+    border:1px dashed #ccc !important;border-radius:2mm !important;
+    padding:2mm 2.5mm !important;
+    display:flex !important;flex-direction:column !important;
+    page-break-inside:avoid !important;break-inside:avoid !important;
+    background:#fff !important;overflow:hidden !important;
   }
-
+  #printArea .label > *{min-height:0 !important;min-width:0 !important}
+  #printArea .label .lbl-top{display:flex !important;flex-direction:column !important;gap:.3mm !important;flex:0 0 auto !important}
+  #printArea .label .lbl-desig{
+    font-size:10pt !important;font-weight:700 !important;line-height:1.15 !important;
+    overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important;max-width:100% !important;
+  }
+  #printArea .label .lbl-sub{
+    font-size:7.5pt !important;color:#555 !important;line-height:1.15 !important;
+    overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important;max-width:100% !important;
+  }
+  #printArea .label .lbl-barcode{
+    flex:1 1 auto !important;min-height:0 !important;
+    display:flex !important;align-items:center !important;justify-content:center !important;
+    padding:.5mm 0 0 !important;overflow:hidden !important;
+  }
   #printArea .label .lbl-barcode svg{
-    display:block !important;
-    max-width:100% !important;
-    height:11mm !important;
+    display:block !important;width:100% !important;max-width:100% !important;
+    height:100% !important;max-height:10mm !important;
   }
+  #printArea .label .lbl-barcode-num{
+    font-family:ui-monospace,monospace !important;
+    font-size:7pt !important;
+    text-align:center !important;letter-spacing:.08em !important;
+    color:#000 !important;padding:.4mm 0 .3mm !important;
+    flex:0 0 auto !important;
+    overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important;
+  }
+  #printArea .label .lbl-foot{
+    display:flex !important;justify-content:space-between !important;align-items:flex-end !important;
+    gap:2mm !important;font-size:7pt !important;line-height:1.2 !important;flex:0 0 auto !important;
+  }
+  #printArea .label .lbl-cell{
+    font-family:ui-monospace,monospace !important;font-weight:700 !important;
+    background:#f0f0f0 !important;padding:.6mm 1.4mm !important;border-radius:1mm !important;
+    font-size:8.5pt !important;display:inline-block !important;max-width:100% !important;
+    overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important;
+    -webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;
+  }
+  #printArea .label .lbl-qty{font-weight:700 !important;white-space:nowrap !important}
+  #printArea .label .lbl-wh{color:#666 !important;font-size:6.5pt !important;overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important;max-width:100% !important}
 
-  /* Печать таблицы (ведомость) */
-  #printArea .print-list{
-    border-collapse:collapse !important;
-    width:100% !important;
-    font-size:11pt !important;
-  }
-  #printArea .print-list th,
-  #printArea .print-list td{
-    border:1px solid #333 !important;
-    padding:4px 6px !important;
-    color:#000 !important;
-  }
-  #printArea .print-list th{
-    background:#eaeaea !important;
-    -webkit-print-color-adjust:exact !important;
-    print-color-adjust:exact !important;
-  }
+  #printArea .print-list{border-collapse:collapse !important;width:100% !important;font-size:11pt !important}
+  #printArea .print-list th,#printArea .print-list td{border:1px solid #333 !important;padding:4px 6px !important;color:#000 !important}
+  #printArea .print-list th{background:#eaeaea !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
 
-  @page{
-    size:A4 portrait;
-    margin:8mm;
-  }
+  @page{size:A4 portrait;margin:8mm}
 }
+
+.mobile-nav{display:none;position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--border);z-index:50;padding:6px 4px calc(6px + var(--sb));box-shadow:0 -4px 20px rgba(15,23,42,.06);justify-content:space-around;align-items:flex-end}
+.mobile-nav button{flex:1;background:transparent;border:none;padding:4px 2px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:9.5px;color:var(--muted);cursor:pointer;font-family:inherit;min-height:48px;justify-content:center}
+.mobile-nav button.active{color:var(--accent)}
+.mobile-nav button svg{width:20px;height:20px;flex-shrink:0}
+.mobile-nav button.nav-add{color:var(--accent)}
+.mobile-nav button.nav-add svg{background:var(--accent);color:#fff;border-radius:10px;padding:8px;box-sizing:content-box;width:22px;height:22px}
+.fab-share{position:fixed;right:14px;bottom:calc(84px + var(--sb));z-index:45;width:50px;height:50px;border-radius:50%;background:var(--accent);color:#fff;border:none;box-shadow:0 8px 20px rgba(79,70,229,.4);cursor:pointer;display:none;align-items:center;justify-content:center}
+.fab-share svg{width:20px;height:20px}
+.sheet{display:none;position:fixed;inset:0;z-index:200}
+.sheet.open{display:block}
+.sheet-bg{position:absolute;inset:0;background:rgba(15,23,42,.5)}
+.sheet-body{position:absolute;bottom:0;left:0;right:0;background:var(--card);border-radius:22px 22px 0 0;padding:8px 14px calc(16px + var(--sb));max-height:85vh;overflow-y:auto}
+.sheet-handle{width:40px;height:4px;background:#cbd5e1;border-radius:2px;margin:6px auto 14px}
+.sheet-title{font-size:11.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;padding:14px 12px 4px}
+.sheet-item{display:flex;align-items:center;gap:14px;width:100%;padding:13px 12px;min-height:48px;background:transparent;border:none;border-radius:10px;font-size:14px;color:var(--text);cursor:pointer;font-family:inherit;text-align:left;font-weight:500}
+.sheet-item:hover{background:#f1f5f9}
+.sheet-item svg{width:18px;height:18px;color:var(--muted);flex-shrink:0}
+.sheet-item.danger{color:var(--danger)}
+.sheet-item.danger svg{color:var(--danger)}
+.import-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.import-card{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:22px 12px;cursor:pointer;font-family:inherit;text-align:center;transition:.15s}
+.import-card:hover{border-color:var(--accent);background:#f8faff}
+.import-card-icon{font-size:34px;margin-bottom:8px}
+.import-card-title{font-weight:600;margin-bottom:4px;font-size:14px}
+.import-card-desc{font-size:11.5px;color:var(--muted)}
+.import-summary{background:#f8fafc;border-radius:10px;padding:12px 14px;font-size:13px;margin-bottom:14px}
+.import-summary b{color:var(--accent)}
+.import-mode{display:flex;gap:10px;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;margin-bottom:8px;cursor:pointer;transition:.15s}
+.import-mode:hover{border-color:#c7d2fe}
+.import-mode input[type=radio]{margin-top:3px;flex-shrink:0}
+.import-mode > div{flex:1}
+.import-mode .hint{margin-top:2px}
+
+/* ============ ЭКРАН ВХОДА ============ */
+#authScreen{
+  position:fixed;inset:0;
+  background:radial-gradient(circle at 20% 20%,#1e293b 0%,#0f172a 60%,#020617 100%);
+  z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;overflow-y:auto;
+}
+.auth-card{
+  background:#fff;border-radius:20px;
+  max-width:400px;width:100%;
+  padding:30px 26px 24px;
+  box-shadow:0 24px 70px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.05);
+  margin:auto;
+  animation:authIn .35s ease;
+}
+@keyframes authIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.auth-logo{width:56px;height:56px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;border-radius:16px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;font-weight:800;font-size:22px;box-shadow:0 8px 24px rgba(79,70,229,.35);overflow:hidden}
+.auth-logo svg,.auth-logo img{width:70%;height:70%;object-fit:contain}
+.auth-card h1{margin:0 0 4px;font-size:20px;font-weight:700;text-align:center;letter-spacing:-.01em}
+.auth-card .sub{color:#64748b;margin:0 0 20px;font-size:12.5px;text-align:center}
+.auth-tabs{display:flex;gap:8px;margin-bottom:20px}
+.auth-tabs button{flex:1;padding:10px;border:1px solid #e6e9f0;border-radius:8px;background:#fff;color:#475569;cursor:pointer;font-family:inherit;font-size:13px;font-weight:500}
+.auth-tabs button.active{background:#eef2ff;color:#4f46e5;border-color:#c7d2fe}
+.auth-form{display:flex;flex-direction:column;gap:12px}
+.auth-form label{font-size:12px;color:#64748b;display:block;margin-bottom:4px;font-weight:500}
+.auth-form input{width:100%;padding:11px 12px;border:1px solid #e6e9f0;border-radius:8px;font-size:14px;font-family:inherit}
+.auth-form input:focus{border-color:#4f46e5;outline:none;box-shadow:0 0 0 3px rgba(79,70,229,.12)}
+.auth-form button[type=submit]{padding:12px;border:none;border-radius:8px;background:#4f46e5;color:#fff;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit}
+.auth-form button[type=submit]:disabled{opacity:.6}
+.auth-sep{display:flex;align-items:center;gap:10px;margin:20px 0;color:#94a3b8;font-size:12px}
+.auth-sep div{flex:1;height:1px;background:#e6e9f0}
+.auth-error{color:#dc2626;font-size:13px;margin-top:14px;min-height:18px;text-align:center}
+.auth-foot{text-align:center;margin-top:14px;font-size:11.5px;color:#94a3b8}
+.tg-wrap{margin-top:0;display:flex;flex-direction:column;align-items:center;gap:8px}
+.tg-hint{font-size:11.5px;color:#94a3b8;text-align:center}
+
+.invite-row{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#f8fafc;border-radius:7px;font-size:13px;margin-top:6px}
+.invite-row .em{flex:1;font-family:monospace}
+.invite-row button{background:transparent;border:none;color:#dc2626;cursor:pointer;padding:4px;border-radius:5px;line-height:0}
+
 @media (max-width:900px){.hide-sm{display:none}th.actions-col{width:auto}}
 @media (max-width:768px){
 header{padding:6px 10px;gap:8px;height:calc(52px + var(--st));padding-top:var(--st);flex-wrap:nowrap}
@@ -380,6 +496,7 @@ input,select,textarea{font-size:16px !important;min-height:44px}
 
 <div id="authScreen">
   <div class="auth-card">
+    <div class="auth-logo" id="authLogo">С</div>
     <h1>Складской учёт</h1>
     <p class="sub">Войдите, чтобы продолжить</p>
     <div class="auth-tabs">
@@ -394,15 +511,16 @@ input,select,textarea{font-size:16px !important;min-height:44px}
       <button id="authSubmit" type="submit">Войти</button>
     </form>
     <div class="auth-sep"><div></div>или<div></div></div>
-    <div style="display:flex;justify-content:center">
+    <div class="tg-wrap">
       <script async src="https://telegram.org/js/telegram-widget.js?22"
         data-telegram-login="sematlabbot"
         data-size="large"
         data-onauth="onTelegramAuth(user)"
         data-request-access="write"></script>
+      <div class="tg-hint">Быстрый вход, если ваш Telegram привязан к профилю</div>
     </div>
     <div class="auth-error" id="authError"></div>
-    <div style="text-align:center;margin-top:14px;font-size:11.5px;color:#94a3b8">
+    <div class="auth-foot">
       Регистрация по приглашению. Первый пользователь становится администратором.
     </div>
   </div>
@@ -587,6 +705,9 @@ input,select,textarea{font-size:16px !important;min-height:44px}
       <div><label>Логин (username)</label><input type="text" id="profileUsername" placeholder="username"></div>
       <div><label>Отображаемое имя</label><input type="text" id="profileDisplayName" placeholder="Иван Иванов"></div>
       <div class="full"><label>URL аватара</label><input type="url" id="profileAvatarUrl" placeholder="https://..."></div>
+      <div class="full"><label>Telegram username (без @)</label><input type="text" id="profileTelegram" placeholder="username" autocomplete="off">
+        <div class="hint">Если заполнить, вход через Telegram-виджет будет пускать в <b>этот</b> аккаунт.</div>
+      </div>
     </div></fieldset>
   </div><div class="modal-foot"><button type="button" class="btn" data-close>Отмена</button><button type="submit" class="btn primary">Сохранить</button></div></form>
 </div></div>
@@ -688,7 +809,7 @@ input,select,textarea{font-size:16px !important;min-height:44px}
 
 </div><!-- appRoot -->
 
-<!-- 👇 Печатаемая зона — прямым ребёнком body -->
+<!-- Печатаемая зона — прямым ребёнком body -->
 <div id="printArea"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -780,14 +901,24 @@ $('#authForm').addEventListener('submit',async function(e){
   btn.disabled=false;btn.textContent=authMode==='login'?'Войти':'Создать аккаунт';
 });
 window.onTelegramAuth=async function(tgUser){
-  var err=$('#authError');err.style.color='#64748b';err.textContent='Проверка Telegram...';
+  var err=$('#authError');
+  err.style.color='#64748b'; err.textContent='Проверка Telegram…';
   try{
-    var res=await fetch(SUPABASE_URL+'/functions/v1/telegram-auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(tgUser)});
+    var res=await fetch(SUPABASE_URL+'/functions/v1/telegram-auth',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(tgUser)
+    });
     var data=await res.json();
-    if(!res.ok)throw new Error(data.error||'Telegram auth failed');
+    if(!res.ok||!data.token_hash) throw new Error(data.error||'Telegram auth failed');
     var v=await sb.auth.verifyOtp({token_hash:data.token_hash,type:'magiclink'});
-    if(v.error)throw v.error;
-  }catch(e){err.style.color='#dc2626';err.textContent=e.message||String(e);}
+    if(v.error) throw v.error;
+    err.textContent='';
+  }catch(e){
+    console.error('[TG]',e);
+    err.style.color='#dc2626';
+    err.textContent=(e&&e.message)||String(e);
+  }
 };
 sb.auth.onAuthStateChange(async function(event,session){
   if(session&&session.user){
@@ -882,16 +1013,21 @@ async function getUserName(id){if(!id)return '—';if(userNameCache[id])return u
 
 function tryAutoLoadLogo(){
   var cands=['logo.svg','logo.png','logo.jpg','logo.jpeg'],idx=0;
+  function apply(txt,isSvg){
+    var b=$('#brandLogo'),bg=$('#bgLogo'),al=$('#authLogo');
+    if(b)b.innerHTML=txt;if(bg)bg.innerHTML=txt;
+    if(al){al.innerHTML=txt;if(isSvg){al.style.background='#fff';al.style.padding='6px';}}
+  }
   function next(){
     if(idx>=cands.length)return;
     var f=cands[idx++];
     if(f.indexOf('.svg')!==-1){
       fetch(f,{cache:'no-store'}).then(function(r){return r.ok?r.text():null;}).then(function(txt){
-        if(txt&&txt.indexOf('<svg')!==-1){var b=$('#brandLogo'),bg=$('#bgLogo');if(b)b.innerHTML=txt;if(bg)bg.innerHTML=txt;}else next();
+        if(txt&&txt.indexOf('<svg')!==-1){apply(txt,true);}else next();
       }).catch(function(){next();});
     }else{
       var img=new Image();
-      img.onload=function(){var b=$('#brandLogo'),bg=$('#bgLogo');var tag='<img src="'+f+'" alt="logo">';if(b)b.innerHTML=tag;if(bg)bg.innerHTML=tag;};
+      img.onload=function(){apply('<img src="'+f+'" alt="logo">',false);};
       img.onerror=function(){next();};
       img.src=f+'?t='+Date.now();
     }
@@ -1604,10 +1740,9 @@ $('#btnImportConfirm').addEventListener('click',async function(){
 });
 async function doImport(arr,mode){
   arr.forEach(function(it){if(!it.id)it.id=uid();});
-  // УБИРАЕМ created_by из payload — если его нет в таблице
   var dbItems=arr.map(function(it){
     var row=rowToDB(it);
-    delete row.created_by; // на случай если поле отсутствует
+    delete row.created_by;
     return row;
   });
   if(mode==='replace'){
@@ -1697,18 +1832,10 @@ function printLabelsFor(ids){
     list=getFiltered();
   }
   if(!list.length){toast('Нет позиций для печати','err');return;}
-
-  // Диагностика: убеждаемся, что контейнер существует и он в body
   var area=document.getElementById('printArea');
-  if(!area){
-    toast('Не найден #printArea','err');
-    console.error('[PRINT] #printArea отсутствует в DOM');
-    return;
-  }
-  if(area.parentNode!==document.body){
-    console.warn('[PRINT] #printArea не является прямым ребёнком <body>, переносим...');
-    document.body.appendChild(area);
-  }
+  if(!area){toast('Не найден #printArea','err');console.error('[PRINT] #printArea отсутствует в DOM');return;}
+  if(area.parentNode!==document.body){console.warn('[PRINT] #printArea не прямой ребёнок <body>, переношу');document.body.appendChild(area);}
+
   var labels='';
   for(var j=0;j<list.length;j++){
     var it2=list[j];
@@ -1717,21 +1844,38 @@ function printLabelsFor(ids){
     var cat=categoryOf(it2.category);
     var specs=specsOf(it2);
     if(specs==='—'&&cat)specs=cat.label;
-    labels+='<div class="label"><div><div class="lbl-desig">'+esc(it2.designation||'—')+'</div><div class="lbl-sub">'+esc(specs)+'</div></div><div class="lbl-barcode">'+code39SVG(code)+'</div><div class="lbl-foot"><div><div class="lbl-wh">'+esc(it2.warehouse||'')+'</div><span class="lbl-cell">'+(esc(locStr(it2))||'—')+'</span></div><div class="lbl-qty">'+qty+'</div></div></div>';
+    labels+=
+      '<div class="label">'+
+        '<div class="lbl-top">'+
+          '<div class="lbl-desig" title="'+escAttr(it2.designation||'')+'">'+esc(it2.designation||'—')+'</div>'+
+          '<div class="lbl-sub" title="'+escAttr(specs)+'">'+esc(specs)+'</div>'+
+        '</div>'+
+        '<div class="lbl-barcode">'+code39SVG(code)+'</div>'+
+        '<div class="lbl-barcode-num">'+esc(code)+'</div>'+
+        '<div class="lbl-foot">'+
+          '<div style="min-width:0;flex:1">'+
+            '<div class="lbl-wh">'+esc(it2.warehouse||'')+'</div>'+
+            '<span class="lbl-cell">'+(esc(locStr(it2))||'—')+'</span>'+
+          '</div>'+
+          '<div class="lbl-qty">'+qty+'</div>'+
+        '</div>'+
+      '</div>';
   }
-  $('#printArea').innerHTML='<div class="label-sheet">'+labels+'</div>';
-  setTimeout(function(){window.print();},80);
+  area.innerHTML='<div class="label-sheet">'+labels+'</div>';
+  setTimeout(function(){console.log('[PRINT] Открываю диалог печати. Этикеток:',list.length);window.print();},150);
 }
 function printList(){
   var list=getFiltered();
   if(!list.length){toast('Нет позиций','err');return;}
+  var area=document.getElementById('printArea');
+  if(area.parentNode!==document.body){document.body.appendChild(area);}
   var rows='';
   for(var i=0;i<list.length;i++){
     var it=list[i],cat=categoryOf(it.category),specs=specsOf(it);
     rows+='<tr><td>'+esc(it.designation||'')+'</td><td>'+esc(specs)+'</td><td>'+esc(cat?cat.label:'')+'</td><td>'+esc(it.warehouse||'')+'</td><td>'+esc(locStr(it))+'</td><td>'+esc(it.project||'')+'</td><td>'+esc(it.machine||'')+'</td><td style="text-align:right">'+fmt(it.length,1)+' '+esc(it.unit||'м')+'</td><td>'+esc(statusOf(it.status).label)+'</td></tr>';
   }
-  $('#printArea').innerHTML='<h1 class="print-title">Ведомость остатков</h1><div class="print-sub">'+new Date().toLocaleString('ru-RU')+' · '+list.length+' поз.</div><div class="print-wrap"><table class="print-list"><thead><tr><th>Обозначение</th><th>Характеристики</th><th>Категория</th><th>Склад</th><th>Ячейка</th><th>Проект</th><th>Станок</th><th style="text-align:right">Остаток</th><th>Статус</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
-  setTimeout(function(){window.print();},80);
+  area.innerHTML='<h1 class="print-title">Ведомость остатков</h1><div class="print-sub">'+new Date().toLocaleString('ru-RU')+' · '+list.length+' поз.</div><div class="print-wrap"><table class="print-list"><thead><tr><th>Обозначение</th><th>Характеристики</th><th>Категория</th><th>Склад</th><th>Ячейка</th><th>Проект</th><th>Станок</th><th style="text-align:right">Остаток</th><th>Статус</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+  setTimeout(function(){window.print();},150);
 }
 
 function buildPurchase(){var lowPct=+settings.lowThreshold||20,res=[];for(var i=0;i<items.length;i++){var it=items[i];if(it.status==='written_off'||it.status==='issued')continue;if(it.status==='order'){res.push(it);continue;}var minL=+it.minLength||0,len=+it.length||0;if(minL>0){if(len<minL)res.push(it);continue;}var initL=+it.initialLength||0;if(initL>0&&len<initL*lowPct/100)res.push(it);}return res;}
@@ -1776,6 +1920,7 @@ function openProfileModal(){
   var u=$('#profileUsername');if(u)u.value=(userProfile&&userProfile.username)||'';
   var d=$('#profileDisplayName');if(d)d.value=(userProfile&&userProfile.display_name)||'';
   var a=$('#profileAvatarUrl');if(a)a.value=(userProfile&&userProfile.avatar_url)||'';
+  var tg=$('#profileTelegram');if(tg)tg.value=(userProfile&&userProfile.telegram_username)||'';
   updateProfileAvatarPreview();
   openModal('#modalProfile');
 }
@@ -1794,7 +1939,14 @@ async function submitProfile(e){
   var uname=$('#profileUsername').value.trim();
   var dname=$('#profileDisplayName').value.trim();
   var avurl=$('#profileAvatarUrl').value.trim();
-  var patch={username:uname||null,display_name:dname||null,avatar_url:avurl||null,email:currentUser.email};
+  var tgRaw=($('#profileTelegram').value||'').trim().toLowerCase().replace(/^@/,'');
+  var patch={
+    username:uname||null,
+    display_name:dname||null,
+    avatar_url:avurl||null,
+    telegram_username:tgRaw||null,
+    email:currentUser.email
+  };
   try{
     var r=await sb.from('profiles').upsert(Object.assign({id:currentUser.id},patch));
     if(r.error)throw r.error;
