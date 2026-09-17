@@ -13,22 +13,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,Aria
 body.modal-open{overflow:hidden}
 .bg-logo{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(90vmin,900px);height:min(90vmin,900px);opacity:.05;pointer-events:none;z-index:0;background-position:center;background-repeat:no-repeat;background-size:contain}
 .bg-logo img,.bg-logo svg{width:100%;height:100%;object-fit:contain}
-header{background:#0f172a;color:#fff;padding:0 16px;display:flex;align-items:center;gap:10px;flex-wrap:nowrap;position:sticky;top:0;z-index:20;height:calc(56px + var(--st));padding-top:var(--st)}
+header{background:#ffffff;color:#0f172a;border-bottom:1px solid var(--border);box-shadow:0 1px 3px rgba(15,23,42,.05);padding:0 16px;display:flex;align-items:center;gap:10px;flex-wrap:nowrap;position:sticky;top:0;z-index:20;height:calc(56px + var(--st));padding-top:var(--st)}
 .brand{display:flex;align-items:center;flex-shrink:0}
 .brand-logo{width:34px;height:34px;display:flex;align-items:center;justify-content:center}
 .brand-logo svg,.brand-logo img{width:100%;height:100%;object-fit:contain}
 .search-wrap{flex:1;min-width:0;position:relative;max-width:520px}
 .search-wrap>svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#64748b;pointer-events:none}
-.search-wrap input{width:100%;background:#1e293b;border:1px solid #334155;color:#fff;padding:8px 10px 8px 34px;border-radius:8px;font-size:13px;outline:none;font-family:inherit}
+.search-wrap input{width:100%;background:#f8fafc;border:1px solid #e2e8f0;color:#0f172a;padding:8px 10px 8px 34px;border-radius:8px;font-size:13px;outline:none;font-family:inherit}
 .search-wrap input::placeholder{color:#94a3b8}
 .search-wrap input:focus{border-color:var(--accent)}
 .h-btns{display:flex;gap:6px;align-items:center;flex-shrink:0;margin-left:auto}
-.hbtn{background:transparent;border:1px solid #334155;color:#e2e8f0;padding:7px 11px;border-radius:8px;cursor:pointer;font-size:12.5px;font-weight:500;display:inline-flex;align-items:center;gap:6px;font-family:inherit;white-space:nowrap;min-height:36px}
-.hbtn:hover{background:#1e293b}
+.hbtn{background:#ffffff;border:1px solid #e2e8f0;color:#334155;padding:7px 11px;border-radius:8px;cursor:pointer;font-size:12.5px;font-weight:500;display:inline-flex;align-items:center;gap:6px;font-family:inherit;white-space:nowrap;min-height:36px}
+.hbtn:hover{background:#f1f5f9}
 .hbtn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
 .hbtn.icon-only{padding:8px;min-width:36px;justify-content:center}
-.user-chip{background:#1e293b;border:1px solid #334155;color:#e2e8f0;padding:5px 12px 5px 5px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-family:inherit;min-height:34px}
-.user-chip:hover{background:#334155}
+.user-chip{background:#f8fafc;border:1px solid #e2e8f0;color:#0f172a;padding:5px 12px 5px 5px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-family:inherit;min-height:34px}
+.user-chip:hover{background:#f1f5f9}
 .user-chip .chip-avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#4f46e5,#7c3aed);display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;color:#fff;flex-shrink:0;overflow:hidden}
 .user-chip .chip-avatar img{width:100%;height:100%;object-fit:cover}
 main{padding:14px 18px 40px;max-width:1800px;margin:0 auto;position:relative;z-index:1}
@@ -1004,27 +1004,65 @@ async function saveSettingsRemote(){
 async function getUserName(id){if(!id)return '—';if(userNameCache[id])return userNameCache[id];try{var r=await sb.from('profiles').select('display_name, email').eq('id',id).maybeSingle();var name=(r.data&&(r.data.display_name||r.data.email))||'неизвестный';userNameCache[id]=name;return name;}catch(e){return 'неизвестный';}}
 
 function tryAutoLoadLogo(){
-  var cands=['logo.svg','logo.png','logo.jpg','logo.jpeg'],idx=0;
-  function apply(txt,isSvg){
-    var b=$('#brandLogo'),bg=$('#bgLogo'),al=$('#authLogo');
-    if(b)b.innerHTML=txt;if(bg)bg.innerHTML=txt;
-    if(al){al.innerHTML=txt;if(isSvg){al.style.background='#fff';al.style.padding='6px';}}
-  }
-  function next(){
-    if(idx>=cands.length)return;
-    var f=cands[idx++];
+  // ========== 1. Логотип в шапке: сначала logo.png ==========
+  var headerCands=['logo.png','logo.jpg','logo.jpeg','logo.svg'];
+  function loadHeader(idx){
+    if(idx>=headerCands.length)return;
+    var f=headerCands[idx];
     if(f.indexOf('.svg')!==-1){
       fetch(f,{cache:'no-store'}).then(function(r){return r.ok?r.text():null;}).then(function(txt){
-        if(txt&&txt.indexOf('<svg')!==-1){apply(txt,true);}else next();
-      }).catch(function(){next();});
+        if(txt&&txt.indexOf('<svg')!==-1){
+          var b=document.getElementById('brandLogo');
+          if(b)b.innerHTML=txt;
+        }else loadHeader(idx+1);
+      }).catch(function(){loadHeader(idx+1);});
     }else{
       var img=new Image();
-      img.onload=function(){apply('<img src="'+f+'" alt="logo">',false);};
-      img.onerror=function(){next();};
+      img.onload=function(){
+        var b=document.getElementById('brandLogo');
+        if(b)b.innerHTML='<img src="'+f+'" alt="logo">';
+      };
+      img.onerror=function(){loadHeader(idx+1);};
       img.src=f+'?t='+Date.now();
     }
   }
-  next();
+
+  // ========== 2. Логотип на фоне: сначала logo.svg ==========
+  var bgCands=['logo.svg','logo.png','logo.jpg','logo.jpeg'];
+  function loadBg(idx){
+    if(idx>=bgCands.length)return;
+    var f=bgCands[idx];
+    if(f.indexOf('.svg')!==-1){
+      fetch(f,{cache:'no-store'}).then(function(r){return r.ok?r.text():null;}).then(function(txt){
+        if(txt&&txt.indexOf('<svg')!==-1){
+          var bg=document.getElementById('bgLogo');
+          if(bg)bg.innerHTML=txt;
+        }else loadBg(idx+1);
+      }).catch(function(){loadBg(idx+1);});
+    }else{
+      var img=new Image();
+      img.onload=function(){
+        var bg=document.getElementById('bgLogo');
+        if(bg)bg.innerHTML='<img src="'+f+'" alt="logo">';
+      };
+      img.onerror=function(){loadBg(idx+1);};
+      img.src=f+'?t='+Date.now();
+    }
+  }
+
+  // ========== 3. Логотип на экране входа: logo.png ==========
+  function loadAuth(){
+    var img=new Image();
+    img.onload=function(){
+      var al=document.getElementById('authLogo');
+      if(al)al.innerHTML='<img src="logo.png" alt="logo" style="width:70%;height:70%;object-fit:contain">';
+    };
+    img.src='logo.png?t='+Date.now();
+  }
+
+  loadHeader(0);
+  loadBg(0);
+  loadAuth();
 }
 
 function refreshSelects(){
