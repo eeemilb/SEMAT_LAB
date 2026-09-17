@@ -63,7 +63,7 @@ table{width:100%;border-collapse:separate;border-spacing:0}
 th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
 th{background:#fafbfe;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;white-space:nowrap}
 th.actions-col{width:360px;text-align:right}
-th.sel-col{width:36px;padding:8px 6px 8px 12px}
+th.sel-col{width:52px;padding:8px 6px 8px 12px}
 th.sel-col input{width:16px;height:16px;cursor:pointer;accent-color:var(--accent)}
 tbody tr:last-child td{border-bottom:none}
 tbody tr:hover{background:#f8faff}
@@ -255,7 +255,6 @@ textarea{resize:vertical;min-height:60px}
 .view-action-btn.danger svg{color:var(--danger)}
 .copy-btn{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;padding:0;border:1px solid var(--border);background:#fff;border-radius:6px;cursor:pointer;color:#94a3b8;flex-shrink:0;line-height:0}
 .copy-btn svg{width:12px;height:12px}
-/* Быстрые операции в карточке */
 .quick-ops{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px;padding:12px;background:#f8fafc;border-radius:10px;border:1px solid var(--border)}
 .quick-ops .qo-label{grid-column:1/-1;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:700;margin-bottom:2px}
 .quick-ops button{display:flex;align-items:center;justify-content:center;gap:4px;padding:10px 6px;border-radius:8px;border:1px solid var(--border);background:#fff;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;min-height:38px;transition:.15s}
@@ -264,7 +263,6 @@ textarea{resize:vertical;min-height:60px}
 .quick-ops button.plus:hover{background:#dcfce7}
 .quick-ops button.minus{color:var(--danger);border-color:#fecaca;background:#fef2f2}
 .quick-ops button.minus:hover{background:#fee2e2}
-/* Массовые операции */
 #bulkBar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + var(--sb));background:#0f172a;color:#fff;border-radius:14px;box-shadow:0 10px 40px rgba(15,23,42,.4);padding:10px 12px;display:none;align-items:center;gap:8px;z-index:90;max-width:calc(100vw - 24px);flex-wrap:wrap;justify-content:center}
 #bulkBar.open{display:flex}
 #bulkBar .bb-count{font-size:13px;font-weight:600;margin-right:4px;white-space:nowrap;color:#fff}
@@ -276,7 +274,6 @@ textarea{resize:vertical;min-height:60px}
 #bulkBar select{background:#1e293b;border:1px solid #334155;color:#fff;border-radius:8px;padding:0 24px 0 9px;font-size:12px;height:32px;font-family:inherit;appearance:none;cursor:pointer;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 7px center;max-width:160px}
 #bulkBar .bb-close{background:transparent;border:none;color:#94a3b8;padding:6px}
 #bulkBar .bb-close:hover{color:#fff;background:transparent}
-/* Отчёт "Кто что делал" */
 .whodid-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
 .whodid-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px}
 .whodid-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
@@ -292,7 +289,6 @@ textarea{resize:vertical;min-height:60px}
 .whodid-op{display:flex;justify-content:space-between;gap:8px;font-size:12px;line-height:1.35}
 .whodid-op .op-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#334155}
 .whodid-op .op-delta{font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
-/* Дубликаты */
 .dupe-group{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px}
 .dupe-group-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;flex-wrap:wrap}
 .dupe-group-title{font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px;min-width:0;overflow:hidden;text-overflow:ellipsis}
@@ -303,7 +299,6 @@ textarea{resize:vertical;min-height:60px}
 .dupe-item input[type=radio]{accent-color:var(--accent);cursor:pointer}
 .dupe-item .di-name{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
 .dupe-item .di-qty{font-weight:700;color:var(--accent);white-space:nowrap;font-variant-numeric:tabular-nums}
-/* Штрих-код в карточке */
 .card-barcode{margin-top:16px;padding:14px 16px;background:#fff;border:1px solid var(--border);border-radius:12px;text-align:center}
 .card-barcode h4{margin:0 0 10px;font-size:11.5px;text-transform:uppercase;color:var(--muted);font-weight:600;letter-spacing:.05em}
 .card-barcode-svg{display:flex;align-items:center;justify-content:center;padding:6px 0;background:#fff;border-radius:6px}
@@ -597,7 +592,12 @@ input,select,textarea{font-size:16px !important;min-height:44px}
   <span class="bb-count"><b id="bulkCount">0</b> выбрано</span>
   <select id="bulkStatus"><option value="">Статус…</option></select>
   <select id="bulkProject"><option value="">Проект…</option></select>
+  <select id="bulkMachine"><option value="">Станок…</option></select>
   <select id="bulkWarehouse"><option value="">Склад…</option></select>
+  <button type="button" id="bulkPrint" title="Печать этикеток для выделенных">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+    Этикетки
+  </button>
   <button type="button" class="danger" id="bulkDelete">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
     Удалить
@@ -755,6 +755,7 @@ input,select,textarea{font-size:16px !important;min-height:44px}
 <div><label>Порог «критично» %</label><input type="number" name="critThreshold" min="0" max="50"></div>
 <div><label>Префикс barcode</label><input type="text" name="barcodePrefix" maxlength="4"></div>
 <div><label>Следующий №</label><input type="number" name="nextBarcode" min="1"></div>
+<div class="full"><label>Размеры быстрых кнопок</label><input type="text" name="quickAmounts" placeholder="1, 2, 5"><div class="hint">Через запятую. Используются в карточке для кнопок +X / −X. Пример: 0.5, 1, 2, 5, 10</div></div>
 </div></fieldset>
 <fieldset><legend>Приглашения</legend>
 <div class="grid" style="grid-template-columns:1fr auto;gap:8px;align-items:end">
@@ -767,6 +768,26 @@ input,select,textarea{font-size:16px !important;min-height:44px}
 
 <div class="modal" id="modalView"><div class="modal-box" style="max-width:640px"><div class="modal-head"><h2 id="viewTitle">Карточка</h2><button class="close" data-close><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
 <div class="modal-body" id="viewBody"></div></div></div>
+
+<!-- ДУБЛИРОВАНИЕ -->
+<div class="modal" id="modalDuplicate"><div class="modal-box" style="max-width:520px">
+  <div class="modal-head"><h2>Дублировать позицию</h2><button class="close" data-close><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <form id="duplicateForm"><div class="modal-body">
+    <div class="op-info" id="dupInfo"></div>
+    <div class="grid">
+      <div class="full">
+        <label style="display:flex;align-items:center;gap:8px;font-weight:500;color:var(--text);font-size:13px;cursor:pointer">
+          <input type="checkbox" id="dupCopyQty" style="width:auto;min-height:auto;accent-color:var(--accent)">
+          Скопировать текущее количество в дубликат
+        </label>
+        <div class="hint" style="margin-top:4px">Если не поставить — дубликат создастся с нулевым количеством.</div>
+      </div>
+      <div><label>Проект (для дубликата)</label><select id="dupProject"></select></div>
+      <div><label>Станок (для дубликата)</label><select id="dupMachine"></select></div>
+      <div class="full"><label>Склад (для дубликата)</label><select id="dupWarehouse"></select></div>
+    </div>
+  </div><div class="modal-foot"><button type="button" class="btn" data-close>Отмена</button><button type="submit" class="btn primary">Создать дубликат</button></div></form>
+</div></div>
 
 <div class="modal" id="modalScan"><div class="modal-box" style="max-width:640px"><div class="modal-head"><h2>📷 Сканер</h2><button class="close" data-close><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
 <div class="modal-body"><div id="scannerArea"><div class="scanner-line"></div></div><div class="scan-info" id="scanInfo">Наведите камеру…</div>
@@ -818,7 +839,7 @@ var DEFAULT_CATEGORIES=[
 {id:'mechanics',label:'Механика и крепёж',color:'#64748b',defaultUnit:'шт',fields:[{key:'size',label:'Размер',type:'text'},{key:'material',label:'Материал',type:'text'},{key:'thread',label:'Резьба',type:'text'}]},
 {id:'consumables',label:'Расходники',color:'#f97316',defaultUnit:'шт',fields:[{key:'size',label:'Размер',type:'text'},{key:'material',label:'Материал',type:'text'},{key:'colorName',label:'Цвет',type:'text'},{key:'color',label:'Цвет',type:'color'}]}
 ];
-var DEFAULT_SETTINGS={warehouses:['Основной'],projects:[],machines:[],categories:JSON.parse(JSON.stringify(DEFAULT_CATEGORIES)),currency:'₽',lowThreshold:20,critThreshold:5,barcodePrefix:'C',nextBarcode:1};
+var DEFAULT_SETTINGS={warehouses:['Основной'],projects:[],machines:[],categories:JSON.parse(JSON.stringify(DEFAULT_CATEGORIES)),currency:'₽',lowThreshold:20,critThreshold:5,barcodePrefix:'C',nextBarcode:1,quickAmounts:[1,2,5]};
 
 var items=[],settings=JSON.parse(JSON.stringify(DEFAULT_SETTINGS));
 var currentUser=null,userProfile=null,userNameCache={};
@@ -829,11 +850,12 @@ var authMode='login',rtChannel=null;
 var boundEvents=false,boundTable=false;
 var importState={type:null,items:[],file:null};
 var selectedIds={};
-var lastClickTime=0, lastClickId=null;
+var _dupSourceId=null;
 
 function $(s){return document.querySelector(s);}
 function $$(s){return document.querySelectorAll(s);}
 function fmt(n,d){if(d==null)d=2;if(n==null||n===''||isNaN(n))return '—';return Number(n).toLocaleString('ru-RU',{maximumFractionDigits:d});}
+function fmtQty(n){if(n==null||isNaN(n))return '0';var num=Number(n);return Number.isInteger(num)?String(num):num.toLocaleString('ru-RU',{maximumFractionDigits:2});}
 function fmtDate(iso){if(!iso)return '';var d=new Date(iso);if(isNaN(d.getTime()))return iso;return d.toLocaleString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];});}
 function escAttr(s){return esc(s).replace(/\n/g,' ');}
@@ -1082,6 +1104,7 @@ async function loadAll(){
     var s=await sb.from('app_settings').select('*').eq('id',1).maybeSingle();
     if(s.data&&s.data.data&&Object.keys(s.data.data).length)settings=Object.assign({},DEFAULT_SETTINGS,s.data.data);
     if(!Array.isArray(settings.categories)||!settings.categories.length||!settings.categories[0].fields)settings.categories=JSON.parse(JSON.stringify(DEFAULT_CATEGORIES));
+    if(!Array.isArray(settings.quickAmounts)||!settings.quickAmounts.length)settings.quickAmounts=[1,2,5];
   }catch(e){console.error(e);}
 }
 function initRealtime(){
@@ -1091,7 +1114,7 @@ function initRealtime(){
       try{var r=await sb.from('items').select('*').order('created_at',{ascending:true});if(!r.error){items=(r.data||[]).map(rowFromDB);renderAll();}}catch(e){}
     })
     .on('postgres_changes',{event:'*',schema:'public',table:'app_settings'},async function(){
-      try{var s=await sb.from('app_settings').select('*').eq('id',1).maybeSingle();if(s.data&&s.data.data){settings=Object.assign({},DEFAULT_SETTINGS,s.data.data);refreshSelects();renderAll();}}catch(e){}
+      try{var s=await sb.from('app_settings').select('*').eq('id',1).maybeSingle();if(s.data&&s.data.data){settings=Object.assign({},DEFAULT_SETTINGS,s.data.data);if(!Array.isArray(settings.quickAmounts)||!settings.quickAmounts.length)settings.quickAmounts=[1,2,5];refreshSelects();renderAll();}}catch(e){}
     }).subscribe(function(st){console.log('[SKLAD] Realtime:',st);});
 }
 function stopRealtime(){if(rtChannel){try{sb.removeChannel(rtChannel);}catch(e){}rtChannel=null;}}
@@ -1185,7 +1208,8 @@ function refreshSelects(){
 }
 function populateBulkSelects(){
   var bS=$('#bulkStatus');if(bS)bS.innerHTML='<option value="">Статус…</option>'+STATUS_ORDER.map(function(k){return '<option value="'+k+'">'+STATUSES[k].label+'</option>';}).join('');
-  var bP=$('#bulkProject');if(bP)bP.innerHTML='<option value="">Проект…</option>'+(settings.projects||[]).map(function(v){return '<option value="'+escAttr(v)+'">'+esc(v)+'</option>';}).join('');
+  var bP=$('#bulkProject');if(bP)bP.innerHTML='<option value="">Проект…</option><option value="__clear__">— Очистить —</option>'+(settings.projects||[]).map(function(v){return '<option value="'+escAttr(v)+'">'+esc(v)+'</option>';}).join('');
+  var bM=$('#bulkMachine');if(bM)bM.innerHTML='<option value="">Станок…</option><option value="__clear__">— Очистить —</option>'+(settings.machines||[]).map(function(v){return '<option value="'+escAttr(v)+'">'+esc(v)+'</option>';}).join('');
   var bW=$('#bulkWarehouse');if(bW)bW.innerHTML='<option value="">Склад…</option>'+(settings.warehouses||[]).map(function(v){return '<option value="'+escAttr(v)+'">'+esc(v)+'</option>';}).join('');
 }
 
@@ -1201,14 +1225,14 @@ function clearSelection(){
   selectedIds={};
   $$('.row-select').forEach(function(ch){ch.checked=false;});
   $$('tbody tr.selected').forEach(function(tr){tr.classList.remove('selected');});
-  var all=$('#selectAllChk');if(all)all.checked=false;
+  var all=$('#selectAllChk');if(all){all.checked=false;all.indeterminate=false;}
   updateBulkBar();
 }
 async function bulkChangeStatus(newStatus){
   var ids=Object.keys(selectedIds);
   if(!ids.length)return;
   var sInfo=statusOf(newStatus);
-  if(!confirm('Изменить статус '+ids.length+' позиций на «'+sInfo.label+'»?'))return;
+  if(!confirm('Изменить статус '+ids.length+' позиций на «'+sInfo.label+'»?\n\nЭто действие нельзя отменить.'))return;
   try{
     for(var i=0;i<ids.length;i++){
       var it=findItem(ids[i]);if(!it)continue;
@@ -1225,7 +1249,8 @@ async function bulkChangeStatus(newStatus){
 async function bulkAssignField(field,value,label){
   var ids=Object.keys(selectedIds);
   if(!ids.length)return;
-  if(!confirm('Установить '+label+' = «'+value+'» для '+ids.length+' позиций?'))return;
+  var display=value||'— (пусто, снять привязку) —';
+  if(!confirm('Изменить «'+label+'» на:\n\n'+display+'\n\nДля '+ids.length+' позиций?\n\nЭто действие нельзя отменить.'))return;
   try{
     for(var i=0;i<ids.length;i++){
       var it=findItem(ids[i]);if(!it)continue;
@@ -1243,7 +1268,7 @@ async function bulkAssignField(field,value,label){
 async function bulkDelete(){
   var ids=Object.keys(selectedIds);
   if(!ids.length)return;
-  if(!confirm('Удалить '+ids.length+' позиций? Действие необратимо.'))return;
+  if(!confirm('Удалить '+ids.length+' позиций?\n\nЭто действие необратимо.'))return;
   try{
     for(var i=0;i<ids.length;i++){
       await sbDelete(ids[i]);
@@ -1253,6 +1278,12 @@ async function bulkDelete(){
     renderAll();
     toast('Удалено: '+ids.length,'ok');
   }catch(e){toast('Ошибка: '+(e.message||e),'err');}
+}
+function bulkPrintLabels(){
+  var ids=Object.keys(selectedIds);
+  if(!ids.length){toast('Ничего не выделено','err');return;}
+  if(ids.length>200){if(!confirm('Выделено '+ids.length+' позиций. Печатать все?'))return;}
+  printLabelsFor(ids);
 }
 
 /* ============ INLINE EDIT ============ */
@@ -1306,7 +1337,6 @@ async function quickOp(id,type,amount){
   catch(e){toast('Ошибка: '+(e.message||e),'err');return;}
   renderTable();
   renderCatBar();
-  // Обновить UI карточки без полного перерендера
   var body=$('#viewBody');
   if(body){
     var initLen=+it.initialLength||0;
@@ -1327,25 +1357,52 @@ async function quickOp(id,type,amount){
   }
 }
 
-/* ============ DUPLICATE ============ */
-async function duplicateItem(id){
+/* ============ ДУБЛИРОВАНИЕ ============ */
+function openDuplicateModal(id){
   var src=findItem(id);if(!src)return;
+  _dupSourceId=id;
+  var info=$('#dupInfo');
+  if(info)info.innerHTML='<b>'+esc(src.designation||'')+'</b>'+(src.name?' · '+esc(src.name):'')+' · '+fmt(src.length,2)+' '+esc(src.unit||'м');
+  var dp=$('#dupProject');
+  if(dp)dp.innerHTML='<option value="">— как у оригинала'+(src.project?' ('+esc(src.project)+')':'')+' —</option>'+
+    (settings.projects||[]).map(function(v){return '<option value="'+escAttr(v)+'">'+esc(v)+'</option>';}).join('');
+  var dm=$('#dupMachine');
+  if(dm)dm.innerHTML='<option value="">— как у оригинала'+(src.machine?' ('+esc(src.machine)+')':'')+' —</option>'+
+    (settings.machines||[]).map(function(v){return '<option value="'+escAttr(v)+'">'+esc(v)+'</option>';}).join('');
+  var dw=$('#dupWarehouse');
+  if(dw)dw.innerHTML='<option value="">— как у оригинала'+(src.warehouse?' ('+esc(src.warehouse)+')':'')+' —</option>'+
+    (settings.warehouses||[]).map(function(v){return '<option value="'+escAttr(v)+'">'+esc(v)+'</option>';}).join('');
+  var cq=$('#dupCopyQty');if(cq)cq.checked=false;
+  closeModal('#modalView');
+  setTimeout(function(){openModal('#modalDuplicate');},150);
+}
+async function submitDuplicateForm(e){
+  e.preventDefault();
+  if(!_dupSourceId){toast('Оригинал не найден','err');return;}
+  var src=findItem(_dupSourceId);if(!src){toast('Оригинал не найден','err');return;}
+  var copyQty=$('#dupCopyQty')?$('#dupCopyQty').checked:false;
+  var newProject=$('#dupProject')?$('#dupProject').value:'';
+  var newMachine=$('#dupMachine')?$('#dupMachine').value:'';
+  var newWarehouse=$('#dupWarehouse')?$('#dupWarehouse').value:'';
   var now=new Date().toISOString();
   var newIt=JSON.parse(JSON.stringify(src));
   newIt.id=uid();
   newIt.barcode=genBarcode();
-  newIt.length=0;
-  newIt.initialLength=0;
+  newIt.length=copyQty?(+src.length||0):0;
+  newIt.initialLength=copyQty?(+src.initialLength||0):0;
   newIt.status='stock';
-  newIt.history=[{date:now,type:'receive',delta:0,comment:'Дубликат «'+(src.designation||'')+'»',length:0,by:currentUser?currentUser.id:null}];
+  if(newProject)newIt.project=newProject;
+  if(newMachine)newIt.machine=newMachine;
+  if(newWarehouse)newIt.warehouse=newWarehouse;
+  newIt.history=[{date:now,type:'receive',delta:+newIt.length||0,comment:'Дубликат «'+(src.designation||'')+'»',length:+newIt.length||0,by:currentUser?currentUser.id:null}];
   newIt.createdAt=now;
   newIt.updatedAt=now;
   try{
     var created=await sbInsert(newIt);
     items.push(created);
     renderAll();
+    closeModal('#modalDuplicate');
     toast('Дубликат создан','ok');
-    closeModal('#modalView');
     setTimeout(function(){openItemModal(newIt.id);},200);
   }catch(e){
     console.error(e);
@@ -1402,7 +1459,6 @@ function runFindDuplicates(){
   }
   box.innerHTML=html;
   window.__dupeGroups=groups;
-  // Обработчики на кнопки "Объединить"
   box.querySelectorAll('[data-merge-group]').forEach(function(b){
     b.addEventListener('click',function(){mergeDuplicateGroup(Number(b.getAttribute('data-merge-group')));});
   });
@@ -1599,10 +1655,10 @@ function rowHtml(it){
     '<td><select class="badge" data-action="status" style="color:'+st.fg+';background:'+st.bg+';border-color:'+st.bg+'">'+statusOpts+'</select></td>'+
     '<td><div class="row-actions">'+
       '<button type="button" class="action-btn" data-action="view" data-id="'+escAttr(it.id)+'">'+ICON_VIEW+'<span>Карточка</span></button>'+
-      '<button type="button" class="action-btn" data-action="edit" data-id="'+escAttr(it.id)+'">'+ICON_EDIT+'<span>Ред.</span></button>'+
       '<button type="button" class="action-btn" data-action="op" data-id="'+escAttr(it.id)+'">'+ICON_OP+'<span>Опер.</span></button>'+
-      '<button type="button" class="action-btn" data-action="hist" data-id="'+escAttr(it.id)+'">'+ICON_HIST+'<span>Ист.</span></button>'+
       '<button type="button" class="action-btn" data-action="print" data-id="'+escAttr(it.id)+'">'+ICON_TAG+'<span>Этикетка</span></button>'+
+      '<button type="button" class="action-btn" data-action="hist" data-id="'+escAttr(it.id)+'">'+ICON_HIST+'<span>Ист.</span></button>'+
+      '<button type="button" class="action-btn" data-action="edit" data-id="'+escAttr(it.id)+'">'+ICON_EDIT+'<span>Ред.</span></button>'+
       '<button type="button" class="action-btn danger" data-action="del" data-id="'+escAttr(it.id)+'">'+ICON_DEL+'<span>Удал.</span></button>'+
     '</div></td></tr>';
 }
@@ -1644,7 +1700,6 @@ function renderTable(){
   }
   tbody.innerHTML=html;
   updateBulkBar();
-  // Обновить select-all
   var allChk=$('#selectAllChk');
   if(allChk){
     var visibleIds=list.map(function(x){return x.id;});
@@ -1749,7 +1804,6 @@ function renderDashboard(){
   el.querySelectorAll('[data-toggle-project]').forEach(function(h){h.addEventListener('click',function(){var pid=h.getAttribute('data-toggle-project');var card=el.querySelector('.proj-card[data-pid="'+pid+'"]');if(!card)return;card.classList.toggle('open');collapsedProjects[pid]=!card.classList.contains('open');});});
   el.querySelectorAll('[data-toggle-machine]').forEach(function(h){h.addEventListener('click',function(e){e.stopPropagation();var mid=h.getAttribute('data-toggle-machine');var block=h.closest('.machine-block');if(!block)return;block.classList.toggle('open');collapsedMachines[mid]=!block.classList.contains('open');});});
   el.querySelectorAll('.machine-item').forEach(function(row){row.addEventListener('click',function(e){e.stopPropagation();var id=row.getAttribute('data-id');if(id)openViewModal(id);});});
-  // Асинхронная загрузка "Кто что делал"
   loadWhoDidInto(el);
 }
 
@@ -1887,6 +1941,19 @@ function buildCardBarcode(it){
     '</div>'+
   '</div>';
 }
+function quickButtonsHtml(){
+  var q=Array.isArray(settings.quickAmounts)&&settings.quickAmounts.length?settings.quickAmounts:[1,2,5];
+  var html='<div class="qo-label">Быстрые операции</div>';
+  for(var i=0;i<q.length;i++){
+    var v=q[i];
+    html+='<button type="button" class="plus" data-quick="receive" data-amount="'+v+'" title="Получить '+fmtQty(v)+'">+'+fmtQty(v)+'</button>';
+  }
+  for(var j=0;j<q.length;j++){
+    var v2=q[j];
+    html+='<button type="button" class="minus" data-quick="cut" data-amount="'+v2+'" title="Отрезать '+fmtQty(v2)+'">−'+fmtQty(v2)+'</button>';
+  }
+  return html;
+}
 
 async function openViewModal(id){
   try{
@@ -1934,15 +2001,7 @@ async function openViewModal(id){
         '<button type="button" class="view-action-btn" data-vact="print">'+ICON_TAG+'Этикетка</button>'+
         '<button type="button" class="view-action-btn" data-vact="duplicate">'+ICON_COPY+'Дублировать</button>'+
       '</div>'+
-      '<div class="quick-ops">'+
-        '<div class="qo-label">Быстрые операции</div>'+
-        '<button type="button" class="plus" data-quick="receive" data-amount="1" title="Получить 1">+1</button>'+
-        '<button type="button" class="plus" data-quick="receive" data-amount="10" title="Получить 10">+10</button>'+
-        '<button type="button" class="plus" data-quick="receive" data-amount="100" title="Получить 100">+100</button>'+
-        '<button type="button" class="minus" data-quick="cut" data-amount="1" title="Отрезать 1">−1</button>'+
-        '<button type="button" class="minus" data-quick="cut" data-amount="10" title="Отрезать 10">−10</button>'+
-        '<button type="button" class="minus" data-quick="cut" data-amount="100" title="Отрезать 100">−100</button>'+
-      '</div>'+
+      '<div class="quick-ops">'+quickButtonsHtml()+'</div>'+
       '<div class="view-info-grid" style="margin-top:16px">'+
         '<div class="row"><span class="lbl">Размещение</span><span class="val">'+fullLocStr+'</span></div>'+
         '<div class="row"><span class="lbl">Проект</span><span class="val">'+esc(it.project||'—')+'</span></div>'+
@@ -1988,7 +2047,7 @@ async function openViewModal(id){
         else if(act==='hist'){openHistoryModal(id);}
         else if(act==='print'){printLabelsFor([id]);}
         else if(act==='op'){var op=b.getAttribute('data-op');closeModal('#modalView');setTimeout(function(){openOpModal(id,op);},150);}
-        else if(act==='duplicate'){duplicateItem(id);}
+        else if(act==='duplicate'){openDuplicateModal(id);}
       });
     });
     openModal('#modalView');
@@ -2402,8 +2461,8 @@ function setView(v){if(v!=='table'&&v!=='kanban'&&v!=='dashboard')v='table';curr
 function renderAll(){renderTable();renderCatBar();if(currentView==='kanban')renderKanban();if(currentView==='dashboard')renderDashboard();}
 
 async function loadInvites(){try{var r=await sb.from('invited_emails').select('*').order('created_at',{ascending:false});var box=$('#invitesList');if(!box)return;if(!r.data||!r.data.length){box.innerHTML='<div style="padding:8px;color:var(--muted);font-size:12px">Нет приглашённых</div>';return;}box.innerHTML=r.data.map(function(i){return '<div class="invite-row"><span class="em">'+esc(i.email)+'</span><button type="button" data-remove-invite="'+escAttr(i.email)+'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>';}).join('');box.querySelectorAll('[data-remove-invite]').forEach(function(b){b.addEventListener('click',async function(){var em=b.getAttribute('data-remove-invite');await sb.from('invited_emails').delete().eq('email',em);loadInvites();});});}catch(e){console.warn(e);}}
-async function openSettings(){var f=$('#settingsForm');if(!f)return;var w=fld(f,'warehouses');if(w)w.value=(settings.warehouses||[]).join('\n');var p=fld(f,'projects');if(p)p.value=(settings.projects||[]).join('\n');var m=fld(f,'machines');if(m)m.value=(settings.machines||[]).join('\n');var c=fld(f,'categories');if(c)c.value=JSON.stringify(settings.categories,null,2);var cu=fld(f,'currency');if(cu)cu.value=settings.currency||'₽';var lt=fld(f,'lowThreshold');if(lt)lt.value=settings.lowThreshold;var ct=fld(f,'critThreshold');if(ct)ct.value=settings.critThreshold;var bp=fld(f,'barcodePrefix');if(bp)bp.value=settings.barcodePrefix;var nb=fld(f,'nextBarcode');if(nb)nb.value=settings.nextBarcode;await loadInvites();openModal('#modalSettings');}
-async function submitSettings(e){e.preventDefault();var f=e.target;var wv=fld(f,'warehouses'),pv=fld(f,'projects'),mv=fld(f,'machines'),cv=fld(f,'categories');if(wv){settings.warehouses=wv.value.split('\n').map(function(s){return s.trim();}).filter(Boolean);if(!settings.warehouses.length)settings.warehouses=['Основной'];}if(pv)settings.projects=pv.value.split('\n').map(function(s){return s.trim();}).filter(Boolean);if(mv)settings.machines=mv.value.split('\n').map(function(s){return s.trim();}).filter(Boolean);if(cv){try{var cats=JSON.parse(cv.value);if(Array.isArray(cats)&&cats.length)settings.categories=cats;}catch(e1){toast('Ошибка JSON','err');return;}}var cu=fld(f,'currency');if(cu)settings.currency=cu.value.trim()||'₽';var lt=fld(f,'lowThreshold');if(lt)settings.lowThreshold=Math.max(1,Math.min(99,+lt.value||20));var ct=fld(f,'critThreshold');if(ct)settings.critThreshold=Math.max(0,Math.min(50,+ct.value||5));var bp=fld(f,'barcodePrefix');if(bp)settings.barcodePrefix=(bp.value.trim()||'C').toUpperCase();var nb=fld(f,'nextBarcode');if(nb)settings.nextBarcode=Math.max(1,+nb.value||1);await saveSettingsRemote();refreshSelects();renderAll();closeModal('#modalSettings');toast('Сохранено','ok');}
+async function openSettings(){var f=$('#settingsForm');if(!f)return;var w=fld(f,'warehouses');if(w)w.value=(settings.warehouses||[]).join('\n');var p=fld(f,'projects');if(p)p.value=(settings.projects||[]).join('\n');var m=fld(f,'machines');if(m)m.value=(settings.machines||[]).join('\n');var c=fld(f,'categories');if(c)c.value=JSON.stringify(settings.categories,null,2);var cu=fld(f,'currency');if(cu)cu.value=settings.currency||'₽';var lt=fld(f,'lowThreshold');if(lt)lt.value=settings.lowThreshold;var ct=fld(f,'critThreshold');if(ct)ct.value=settings.critThreshold;var bp=fld(f,'barcodePrefix');if(bp)bp.value=settings.barcodePrefix;var nb=fld(f,'nextBarcode');if(nb)nb.value=settings.nextBarcode;var qa=fld(f,'quickAmounts');if(qa)qa.value=(settings.quickAmounts||[1,2,5]).join(', ');await loadInvites();openModal('#modalSettings');}
+async function submitSettings(e){e.preventDefault();var f=e.target;var wv=fld(f,'warehouses'),pv=fld(f,'projects'),mv=fld(f,'machines'),cv=fld(f,'categories');if(wv){settings.warehouses=wv.value.split('\n').map(function(s){return s.trim();}).filter(Boolean);if(!settings.warehouses.length)settings.warehouses=['Основной'];}if(pv)settings.projects=pv.value.split('\n').map(function(s){return s.trim();}).filter(Boolean);if(mv)settings.machines=mv.value.split('\n').map(function(s){return s.trim();}).filter(Boolean);if(cv){try{var cats=JSON.parse(cv.value);if(Array.isArray(cats)&&cats.length)settings.categories=cats;}catch(e1){toast('Ошибка JSON','err');return;}}var cu=fld(f,'currency');if(cu)settings.currency=cu.value.trim()||'₽';var lt=fld(f,'lowThreshold');if(lt)settings.lowThreshold=Math.max(1,Math.min(99,+lt.value||20));var ct=fld(f,'critThreshold');if(ct)settings.critThreshold=Math.max(0,Math.min(50,+ct.value||5));var bp=fld(f,'barcodePrefix');if(bp)settings.barcodePrefix=(bp.value.trim()||'C').toUpperCase();var nb=fld(f,'nextBarcode');if(nb)settings.nextBarcode=Math.max(1,+nb.value||1);var qaEl=fld(f,'quickAmounts');if(qaEl){var arr=String(qaEl.value||'').split(/[,\s;]+/).map(function(s){return s.trim().replace(',','.');}).filter(Boolean).map(function(s){return Number(s);}).filter(function(n){return !isNaN(n)&&n>0;});settings.quickAmounts=arr.length?arr:[1,2,5];}await saveSettingsRemote();refreshSelects();renderAll();closeModal('#modalSettings');toast('Сохранено','ok');}
 async function addInvite(){var e=$('#inviteEmail');if(!e)return;var email=e.value.trim().toLowerCase();if(!email||email.indexOf('@')===-1){toast('Введите email','err');return;}try{var r=await sb.from('invited_emails').insert({email:email,invited_by:currentUser?currentUser.id:null});if(r.error)throw r.error;e.value='';await loadInvites();toast('Email приглашён','ok');}catch(err){toast('Ошибка: '+(err.message||err),'err');}}
 
 function openProfileModal(){
@@ -2458,13 +2517,10 @@ function bindEventsOnce(){
   if(tbody&&!boundTable){
     boundTable=true;
     tbody.addEventListener('click',function(e){
-      // Чекбокс выделения
       if(e.target.closest('.row-checkbox-wrap')){
         e.stopPropagation();
-        // change обработается отдельно
         return;
       }
-      // Inline edit — клик по количеству
       var qtyEl=e.target.closest('.len .val[data-qty-id]');
       if(qtyEl){
         e.stopPropagation();
@@ -2531,6 +2587,7 @@ function bindEventsOnce(){
   var ofm=$('#opForm');if(ofm)ofm.addEventListener('submit',submitOpForm);
   var sfm=$('#settingsForm');if(sfm)sfm.addEventListener('submit',submitSettings);
   var pfm=$('#profileForm');if(pfm)pfm.addEventListener('submit',submitProfile);
+  var dfm=$('#duplicateForm');if(dfm)dfm.addEventListener('submit',submitDuplicateForm);
   var pav=$('#profileAvatarUrl');if(pav)pav.addEventListener('input',updateProfileAvatarPreview);
   var pdn=$('#profileDisplayName');if(pdn)pdn.addEventListener('input',updateProfileAvatarPreview);
   var cok=$('#confirmOk');if(cok)cok.addEventListener('click',function(){if(confirmCb)confirmCb();confirmCb=null;closeModal('#modalConfirm');});
@@ -2552,7 +2609,6 @@ function bindEventsOnce(){
   var mnav=$('#mobileNav');
   if(mnav)mnav.addEventListener('click',function(e){var b=e.target.closest('[data-nav]');if(!b)return;var n=b.getAttribute('data-nav');if(n==='table'||n==='kanban'||n==='dashboard')setView(n);else if(n==='add'){openItemModal(null);}else if(n==='scan'){openModal('#modalScan');setTimeout(startScanner,200);}else if(n==='purchase'){openPurchase();}else if(n==='more'){openSheet('#sheetMenu');}});
 
-  // === Обработчики массовых операций ===
   var bb=$('#bulkBar');
   if(bb){
     bb.addEventListener('change',function(e){
@@ -2562,13 +2618,14 @@ function bindEventsOnce(){
       if(!v)return;
       sel.value='';
       if(sel.id==='bulkStatus')bulkChangeStatus(v);
-      else if(sel.id==='bulkProject')bulkAssignField('project',v,'проект');
+      else if(sel.id==='bulkProject')bulkAssignField('project',v==='__clear__'?'':v,'проект');
+      else if(sel.id==='bulkMachine')bulkAssignField('machine',v==='__clear__'?'':v,'станок');
       else if(sel.id==='bulkWarehouse')bulkAssignField('warehouse',v,'склад');
     });
     var bc=$('#bulkClose');if(bc)bc.addEventListener('click',clearSelection);
     var bd=$('#bulkDelete');if(bd)bd.addEventListener('click',bulkDelete);
+    var bp=$('#bulkPrint');if(bp)bp.addEventListener('click',bulkPrintLabels);
   }
-  // Кнопка "Выделить всё"
   var allChk=$('#selectAllChk');
   if(allChk){
     allChk.addEventListener('change',function(){
@@ -2611,7 +2668,6 @@ function bindEventsOnce(){
     },200);
   });
 
-  // Кнопка "Найти заново" в модалке дубликатов
   var bfd=$('#btnFindDuplicates');
   if(bfd)bfd.addEventListener('click',runFindDuplicates);
 
