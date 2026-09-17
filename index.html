@@ -50,7 +50,7 @@ main{padding:14px 18px 100px;max-width:1800px;margin:0 auto;position:relative;z-
 .cat-pill.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 .cat-pill .cnt{font-size:10.5px;opacity:.75;font-weight:600}
 .cat-pill .cat-icon{width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;flex-shrink:0;padding:3px;box-sizing:content-box}
-.cat-pill .cat-icon svg{width:100%;height:100%;display:block}
+.cat-pill .cat-icon svg,.cat-pill .cat-icon img{width:100%;height:100%;display:block}
 .cat-pill.active .cat-icon{background:rgba(255,255,255,.2) !important}
 .filters{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
 .filters select{background:var(--card);border:1px solid var(--border);border-radius:7px;padding:0 26px 0 9px;font-size:12px;color:var(--text);outline:none;font-family:inherit;appearance:none;cursor:pointer;height:32px;line-height:1;max-width:190px;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 7px center}
@@ -79,7 +79,7 @@ tr.group-row.collapsed .group-toggle{transform:rotate(-90deg)}
 tr.group-row .group-meta{color:var(--muted);font-weight:400;font-size:11.5px;margin-left:8px}
 tr.group-row .group-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:8px;vertical-align:middle}
 .cat-icon{width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:inset 0 0 0 1px rgba(15,23,42,.06)}
-.cat-icon svg{width:16px;height:16px;display:block;filter:drop-shadow(0.6px 0 0 rgba(15,23,42,.55)) drop-shadow(-0.6px 0 0 rgba(15,23,42,.55)) drop-shadow(0 0.6px 0 rgba(15,23,42,.55)) drop-shadow(0 -0.6px 0 rgba(15,23,42,.55))}
+.cat-icon svg,.cat-icon img{width:16px;height:16px;display:block;filter:drop-shadow(0.5px 0 0 rgba(15,23,42,.35)) drop-shadow(-0.5px 0 0 rgba(15,23,42,.35)) drop-shadow(0 0.5px 0 rgba(15,23,42,.35)) drop-shadow(0 -0.5px 0 rgba(15,23,42,.35))}
 .design{font-weight:600;font-size:13.5px;margin-bottom:3px}
 .design small{display:block;color:var(--muted);font-weight:400;font-size:11.5px;margin-top:1px}
 .len .val{font-weight:600;font-size:13px;cursor:text;transition:.15s;display:inline-block}
@@ -134,7 +134,7 @@ tr.group-row .group-dot{width:10px;height:10px;border-radius:50%;display:inline-
 .cat-sum-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
 .cat-sum-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px}
 .cat-sum-card .cat-icon{width:34px;height:34px}
-.cat-sum-card .cat-icon svg{width:18px;height:18px}
+.cat-sum-card .cat-icon svg,.cat-sum-card .cat-icon img{width:18px;height:18px}
 .cat-sum-info{flex:1;min-width:0}
 .cat-sum-name{font-weight:600;font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cat-sum-meta{font-size:11.5px;color:var(--muted);margin-top:2px}
@@ -230,7 +230,7 @@ textarea{resize:vertical;min-height:60px}
 .view-hero{padding:6px 0 14px;border-bottom:1px solid var(--border);margin-bottom:16px}
 .view-head-row{display:flex;align-items:flex-start;gap:12px;margin-bottom:8px}
 .view-head-row .cat-icon{width:52px;height:52px}
-.view-head-row .cat-icon svg{width:30px;height:30px}
+.view-head-row .cat-icon svg,.view-head-row .cat-icon img{width:30px;height:30px}
 .view-designation{font-size:20px;font-weight:700;line-height:1.2;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .view-name{font-size:13.5px;color:var(--muted);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .view-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
@@ -472,7 +472,6 @@ tbody tr:not(.group-row):not(.skeleton-tr){display:grid;grid-template-columns:au
 tbody tr.selected{background:#eef2ff !important;border-color:var(--accent)}
 tbody td{padding:0 !important;border:none !important;display:block}
 tbody td:nth-child(1){grid-area:cat}tbody td:nth-child(2){grid-area:design}tbody td:nth-child(3){display:none}tbody td:nth-child(4){grid-area:qty}tbody td:nth-child(5){grid-area:loc}tbody td:nth-child(6){grid-area:prj}tbody td:nth-child(7){grid-area:status}tbody td:nth-child(8){grid-area:act}
-tbody td:nth-child(9){grid-area:act}
 tr.group-row{display:block;margin-bottom:8px;border-radius:10px;border:1px solid var(--border);background:#f8faff}
 tr.group-row td{padding:12px 14px !important;display:block}
 .row-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;width:100%}
@@ -864,13 +863,52 @@ var sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{auth:{persis
 var STATUSES={order:{label:'Заказан',fg:'#92400e',bg:'#fef3c7'},transit:{label:'В пути',fg:'#1e40af',bg:'#dbeafe'},stock:{label:'На складе',fg:'#065f46',bg:'#d1fae5'},reserved:{label:'Зарезервирован',fg:'#5b21b6',bg:'#ede9fe'},issued:{label:'Выдан',fg:'#374151',bg:'#f3f4f6'},written_off:{label:'Списан',fg:'#991b1b',bg:'#fee2e2'}};
 var STATUS_ORDER=['order','transit','stock','reserved','issued','written_off'];
 var OP_TYPES={receive:{label:'Получение',sign:+1},cut:{label:'Отрез / расход',sign:-1},return:{label:'Возврат',sign:+1},writeoff:{label:'Списание',sign:-1},invent:{label:'Инвентаризация',sign:0}};
-var CAT_ICONS={
+
+// Fallback SVG иконки (используются пока не загрузились с Iconify)
+var CAT_ICONS_FALLBACK={
 cables:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6 C6 4.5 10 4.5 10 6 L10 20 C10 21.5 14 21.5 14 20 L14 6 C14 4.5 18 4.5 18 6 L18 20"/><ellipse cx="8" cy="6" rx="2" ry="0.9" fill="currentColor"/><ellipse cx="16" cy="6" rx="2" ry="0.9" fill="currentColor" opacity="0.5"/></svg>',
 electrical:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 7h6M9 11h6"/><circle cx="12" cy="16" r="2"/></svg>',
 drives:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="12" r="6"/><circle cx="11" cy="12" r="2" fill="currentColor"/><path d="M17 12h4M6 8.5L8 12l-2 3.5M16 8.5L14 12l2 3.5"/></svg>',
 mechanics:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
 consumables:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-3 9 3v10l-9 3-9-3z"/><path d="M3 7l9 3 9-3M12 10v10"/></svg>'
 };
+
+// Иконки Iconify по категориям (Tabler Icons — https://tabler-icons.io/)
+var CAT_ICON_SLUGS={
+  cables:'tabler:cable',
+  electrical:'tabler:bolt',
+  drives:'tabler:engine',
+  mechanics:'tabler:tool',
+  consumables:'tabler:box'
+};
+var ICON_CACHE={};
+
+async function preloadIcons(){
+  var ids=Object.keys(CAT_ICON_SLUGS);
+  var jobs=ids.map(async function(id){
+    var slug=CAT_ICON_SLUGS[id];
+    var parts=slug.split(':');
+    if(parts.length<2)return;
+    try{
+      var r=await fetch('https://api.iconify.design/'+parts[0]+'/'+parts[1]+'.svg');
+      if(!r.ok)return;
+      var txt=await r.text();
+      // убираем фиксированные размеры, чтобы CSS контролировал масштаб
+      txt=txt.replace(/\swidth="[^"]*"/,'').replace(/\sheight="[^"]*"/,'');
+      ICON_CACHE[id]=txt;
+      console.log('[ICON] Загружена:',slug);
+    }catch(e){
+      console.warn('[ICON] Не удалось загрузить',slug,e);
+    }
+  });
+  try{await Promise.all(jobs);}catch(e){}
+}
+
+function getCatIcon(id){
+  if(ICON_CACHE[id])return ICON_CACHE[id];
+  return CAT_ICONS_FALLBACK[id]||CAT_ICONS_FALLBACK.cables;
+}
+
 var STATUS_ICONS={
 order:'<svg viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>',
 transit:'<svg viewBox="0 0 24 24" stroke="currentColor"><rect x="1" y="6" width="15" height="12" rx="2"/><path d="M16 8h5l2 4v6h-7"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>',
@@ -915,7 +953,6 @@ function categoryOf(id){for(var i=0;i<settings.categories.length;i++)if(settings
 function statusOf(k){return STATUSES[k]||STATUSES.stock;}
 function findItem(id){for(var i=0;i<items.length;i++)if(items[i].id===id)return items[i];return null;}
 function getFieldValue(it,key){if(it.fields&&it.fields[key]!=null)return it.fields[key];if(it[key]!=null)return it[key];return '';}
-function getCatIcon(id){return CAT_ICONS[id]||CAT_ICONS.cables;}
 function iconColorOf(it){if(!it)return '#3b82f6';var v=getFieldValue(it,'color');if(v&&/^#[0-9a-fA-F]{6}$/.test(v))return v;var cat=categoryOf(it.category);return cat?cat.color:'#3b82f6';}
 function getColor(it){var cat=categoryOf(it.category);if(cat&&cat.fields){for(var i=0;i<cat.fields.length;i++)if(cat.fields[i].type==='color'){var v=getFieldValue(it,cat.fields[i].key);if(v)return v;}}return cat?cat.color:'#3b82f6';}
 function fld(form,name){return form.querySelector('[name="'+name+'"]');}
@@ -1093,6 +1130,7 @@ sb.auth.onAuthStateChange(async function(event,session){
     _skladLoading=true;
     try{renderTable();}catch(e){}
     await loadProfile(session.user);
+    await preloadIcons();
     await loadAll();
     _skladLoading=false;
     if(!_skladInitialized){
@@ -2810,7 +2848,6 @@ function bindEventsOnce(){
   var cok=$('#confirmOk');if(cok)cok.addEventListener('click',function(){if(confirmCb)confirmCb();confirmCb=null;closeModal('#modalConfirm');});
   var bai=$('#btnAddInvite');if(bai)bai.addEventListener('click',addInvite);
 
-  // Отслеживание изменений в формах
   ['#itemForm','#settingsForm','#profileForm','#duplicateForm'].forEach(function(sel){
     var f=$(sel);if(!f)return;
     f.addEventListener('input',function(){markDirty();});
