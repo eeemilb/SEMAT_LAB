@@ -518,8 +518,8 @@ input,select,textarea{font-size:16px !important;min-height:44px}
   <div class="modal-head"><h2>Новый пароль</h2></div>
   <form id="resetForm"><div class="modal-body">
     <p style="margin-top:0;color:var(--muted);font-size:13px">Придумайте новый пароль (минимум 6 символов).</p>
-    <div><label>Новый пароль</label><input type="password" id="resetPassword" required minlength="6"></div>
-    <div style="margin-top:10px"><label>Повторите пароль</label><input type="password" id="resetPassword2" required minlength="6"></div>
+    <div><label>Новый пароль</label><input type="password" id="resetPassword" required minlength="6" autocomplete="new-password"></div>
+<div style="margin-top:10px"><label>Повторите пароль</label><input type="password" id="resetPassword2" required minlength="6" autocomplete="new-password"></div>
     <div class="auth-error" id="resetError"></div>
   </div><div class="modal-foot"><button type="submit" class="btn primary" id="resetSubmit">Сохранить</button></div></form>
 </div></div>
@@ -981,6 +981,7 @@ window.onTelegramAuth=async function(tgUser){
   }
 };
 
+var _skladInitialized=false;
 sb.auth.onAuthStateChange(async function(event,session){
   console.log('[AUTH]',event);
   if(event==='PASSWORD_RECOVERY'){
@@ -990,18 +991,27 @@ sb.auth.onAuthStateChange(async function(event,session){
     return;
   }
   if(session&&session.user){
+    // Уже инициализированы для этого же пользователя — не перезагружаем
+    if(_skladInitialized && currentUser && currentUser.id===session.user.id){
+      console.log('[AUTH] Уже залогинен, пропускаю повторную загрузку');
+      return;
+    }
     currentUser=session.user;
     $('#authScreen').style.display='none';$('#appRoot').style.display='block';
     await loadProfile(session.user);
     await loadAll();
-    initRealtime();
-    refreshSelects();
-    setView('table');
-    bindEventsOnce();
+    if(!_skladInitialized){
+      initRealtime();
+      refreshSelects();
+      setView('table');
+      bindEventsOnce();
+      _skladInitialized=true;
+    }
     renderAll();
     tryAutoLoadLogo();
   }else{
     currentUser=null;userProfile=null;
+    _skladInitialized=false;
     $('#authScreen').style.display='flex';$('#appRoot').style.display='none';
   }
 });
